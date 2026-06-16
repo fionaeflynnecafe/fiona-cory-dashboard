@@ -6,100 +6,101 @@
 <title>Fiona-Cory Daily Executive Dashboard</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; padding: 1rem; }
+  body { font-family: Arial, sans-serif; background: #F7F4EE; min-height: 100vh; padding: 1rem; color: #3D3C3F; }
 
-  .header { background: #fff; border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: .875rem; border: 1px solid #e8e8e8; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+  .header { background: #1C1F18; border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: .875rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
   .header-left { display: flex; align-items: center; gap: 12px; }
-  .logo { width: 38px; height: 38px; border-radius: 9px; background: #4A154B; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-  .header-title { font-size: 17px; font-weight: 700; color: #1a1a1a; }
-  .header-sub { font-size: 12px; color: #aaa; margin-top: 2px; }
-  .header-date { font-size: 12px; color: #aaa; text-align: right; line-height: 1.6; }
+  .logo { width: 38px; height: 38px; border-radius: 9px; background: #198B40; display: flex; align-items: center; justify-content: center; color: #F7F4EE; font-size: 12px; font-weight: 700; flex-shrink: 0; letter-spacing: .03em; }
+  .header-title { font-size: 16px; font-weight: 700; color: #F7F4EE; }
+  .header-sub { font-size: 11px; color: #39B549; margin-top: 2px; letter-spacing: .06em; text-transform: uppercase; }
+  .header-date { font-size: 12px; color: #F7F4EE; text-align: right; line-height: 1.6; opacity: .8; }
 
   .row { display: grid; gap: .875rem; margin-bottom: .875rem; }
   .row-top { grid-template-columns: 1fr 1.6fr; }
   .row-bottom { grid-template-columns: 1.2fr 1fr; }
   @media (max-width: 860px) { .row-top, .row-bottom { grid-template-columns: 1fr; } }
 
-  .card { background: #fff; border-radius: 12px; padding: 1.1rem 1.25rem; border: 1px solid #e8e8e8; display: flex; flex-direction: column; }
+  .card { background: #fff; border-radius: 12px; padding: 1.1rem 1.25rem; border: 1px solid #EDE8DF; display: flex; flex-direction: column; }
 
-  .slabel { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #bbb; margin-bottom: .7rem; }
+  .slabel { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #198B40; margin-bottom: .7rem; display: flex; align-items: center; gap: 6px; }
+  .slabel::after { content: ''; flex: 1; height: 1px; background: #EDE8DF; }
 
   /* Priorities */
-  .prow { display: flex; align-items: flex-start; gap: 9px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .prow { display: flex; align-items: flex-start; gap: 9px; padding: 8px 0; border-bottom: 1px solid #F7F4EE; }
   .prow:last-of-type { border-bottom: none; }
-  .num { width: 23px; height: 23px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-  .n1 { background: #fee2e2; color: #b91c1c; }
-  .n2 { background: #fef3c7; color: #92400e; }
-  .ptext { font-size: 13.5px; color: #1a1a1a; flex: 1; line-height: 1.45; }
-  .pproj { font-size: 11px; color: #bbb; margin-top: 3px; }
+  .num { width: 23px; height: 23px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .n1 { background: #B8942A; color: #fff; }
+  .n2 { background: #EDE8DF; color: #3D3C3F; }
+  .ptext { font-size: 13.5px; color: #3D3C3F; flex: 1; line-height: 1.45; }
+  .pproj { font-size: 11px; color: #198B40; margin-top: 3px; font-weight: 700; }
 
   /* Projects */
   .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1.5rem; }
-  .proj-row { padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .proj-row { padding: 8px 0; border-bottom: 1px solid #F7F4EE; }
   .proj-row:last-of-type { border-bottom: none; }
   .proj-head { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; flex-wrap: wrap; }
-  .proj-name { font-size: 13px; font-weight: 600; color: #1a1a1a; }
-  .ppill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-  .pr { background: #fee2e2; color: #b91c1c; }
-  .pg { background: #d1fae5; color: #065f46; }
-  .pa { background: #fef3c7; color: #92400e; }
-  .pm { background: #f3f4f6; color: #6b7280; }
-  .pupdate { font-size: 12px; color: #555; line-height: 1.55; }
-  .pnext { font-size: 11px; color: #aaa; margin-top: 3px; font-style: italic; }
+  .proj-name { font-size: 13px; font-weight: 700; color: #1C1F18; }
+  .ppill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; letter-spacing: .04em; }
+  .pr { background: #B8942A; color: #fff; }
+  .pg { background: #198B40; color: #fff; }
+  .pa { background: #EDE8DF; color: #3D3C3F; }
+  .pm { background: #F7F4EE; color: #3D3C3F; border: 1px solid #EDE8DF; }
+  .pupdate { font-size: 12px; color: #3D3C3F; line-height: 1.55; }
+  .pnext { font-size: 11px; color: #198B40; margin-top: 3px; font-weight: 700; }
 
   /* Inbox */
-  .irow { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
+  .irow { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #F7F4EE; }
   .irow:last-of-type { border-bottom: none; }
-  .ifolder { font-size: 13px; font-weight: 600; color: #1a1a1a; }
-  .ictx { font-size: 12px; color: #888; margin-top: 3px; line-height: 1.45; font-style: italic; }
-  .ibadge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; margin-top: 2px; }
-  .br { background: #fee2e2; color: #b91c1c; }
-  .bg { background: #f3f4f6; color: #6b7280; }
-  .bb { background: #dbeafe; color: #1d4ed8; }
+  .ifolder { font-size: 13px; font-weight: 700; color: #1C1F18; }
+  .ictx { font-size: 12px; color: #3D3C3F; margin-top: 3px; line-height: 1.45; font-style: italic; }
+  .ibadge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; margin-top: 2px; letter-spacing: .04em; }
+  .br { background: #B8942A; color: #fff; }
+  .bg { background: #EDE8DF; color: #3D3C3F; }
+  .bb { background: #198B40; color: #fff; }
 
   /* Calendar */
-  .crow { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .crow { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #F7F4EE; }
   .crow:last-of-type { border-bottom: none; }
-  .ctime { font-size: 12px; color: #aaa; min-width: 95px; flex-shrink: 0; padding-top: 2px; line-height: 1.45; }
-  .ctitle { font-size: 13.5px; color: #1a1a1a; font-weight: 500; }
-  .csub { font-size: 11.5px; color: #bbb; margin-top: 2px; font-style: italic; }
+  .ctime { font-size: 11px; color: #198B40; min-width: 95px; flex-shrink: 0; padding-top: 2px; line-height: 1.45; font-weight: 700; letter-spacing: .03em; }
+  .ctitle { font-size: 13.5px; color: #1C1F18; font-weight: 700; }
+  .csub { font-size: 11.5px; color: #3D3C3F; margin-top: 2px; font-style: italic; }
 
   /* Comments */
-  .comment-section { margin-top: auto; padding-top: .85rem; border-top: 1px solid #f0f0f0; }
+  .comment-section { margin-top: auto; padding-top: .85rem; border-top: 2px solid #EDE8DF; }
   .comment-thread { display: flex; flex-direction: column; gap: 6px; margin-bottom: 9px; }
   .cbubble { padding: 9px 11px; border-radius: 8px; font-size: 12.5px; line-height: 1.5; }
-  .cbubble-cory { background: #f9f5fa; border-left: 3px solid #4A154B; }
-  .cbubble-fiona { background: #f0f7ff; border-left: 3px solid #1d4ed8; }
-  .cbubble-meta { font-size: 11px; margin-bottom: 3px; display: flex; justify-content: space-between; }
-  .cbubble-cory .author { color: #4A154B; font-weight: 700; }
-  .cbubble-fiona .author { color: #1d4ed8; font-weight: 700; }
-  .ctime2 { color: #bbb; }
-  .cbubble-text { color: #1a1a1a; }
+  .cbubble-cory { background: #EDE8DF; border-left: 3px solid #198B40; }
+  .cbubble-fiona { background: #F7F4EE; border-left: 3px solid #39B549; }
+  .cbubble-meta { font-size: 10px; margin-bottom: 3px; display: flex; justify-content: space-between; }
+  .cbubble-cory .author { color: #198B40; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .cbubble-fiona .author { color: #39B549; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .ctime2 { color: #B8942A; font-weight: 700; }
+  .cbubble-text { color: #3D3C3F; }
   .comment-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .comment-col { display: flex; flex-direction: column; gap: 4px; }
-  .sender-label { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-  .sl-cory { color: #4A154B; }
-  .sl-fiona { color: #1d4ed8; }
+  .sender-label { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .sl-cory { color: #198B40; }
+  .sl-fiona { color: #39B549; }
   .comment-row { display: flex; gap: 6px; align-items: flex-end; }
-  .comment-row textarea { flex: 1; padding: 8px 10px; border: 1px solid #e8e8e8; border-radius: 8px; font-size: 12.5px; font-family: inherit; color: #1a1a1a; resize: none; height: 56px; line-height: 1.45; transition: border-color .15s; }
-  .comment-row textarea:focus { outline: none; border-color: #4A154B; }
-  .fiona-ta:focus { border-color: #1d4ed8 !important; }
-  .comment-row textarea::placeholder { color: #ccc; }
-  .cbtn { padding: 7px 13px; border: none; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity .15s; white-space: nowrap; }
-  .cbtn-cory { background: #4A154B; color: #fff; }
-  .cbtn-fiona { background: #1d4ed8; color: #fff; }
+  .comment-row textarea { flex: 1; padding: 8px 10px; border: 1px solid #EDE8DF; border-radius: 8px; font-size: 12.5px; font-family: Arial, sans-serif; color: #3D3C3F; background: #F7F4EE; resize: none; height: 56px; line-height: 1.45; transition: border-color .15s; }
+  .comment-row textarea:focus { outline: none; border-color: #198B40; background: #fff; }
+  .fiona-ta:focus { border-color: #39B549 !important; }
+  .comment-row textarea::placeholder { color: #B8942A; opacity: .5; font-style: italic; }
+  .cbtn { padding: 7px 13px; border: none; border-radius: 7px; font-size: 11px; font-weight: 700; cursor: pointer; transition: opacity .15s; white-space: nowrap; font-family: Arial, sans-serif; letter-spacing: .04em; }
+  .cbtn-cory { background: #198B40; color: #fff; }
+  .cbtn-fiona { background: #39B549; color: #fff; }
   .cbtn:hover { opacity: .85; }
   .cbtn:disabled { opacity: .4; cursor: not-allowed; }
-  .loading-comments { font-size: 11px; color: #ccc; font-style: italic; padding: 2px 0; }
+  .loading-comments { font-size: 11px; color: #B8942A; font-style: italic; padding: 2px 0; opacity: .6; }
 
-  .footer { text-align: center; font-size: 11px; color: #ccc; padding: .75rem 0 .25rem; }
+  .footer { text-align: center; font-size: 10px; color: #198B40; padding: .75rem 0 .25rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; opacity: .6; }
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-left">
-    <div class="logo">FC</div>
+    <div class="logo">FIG</div>
     <div>
       <div class="header-title">Fiona-Cory Daily Executive Dashboard</div>
       <div class="header-sub">Freedom Investing Group · Prepared by Fiona</div>
@@ -113,11 +114,11 @@
 
   <div class="card">
     <div class="slabel">🚩 Top priorities</div>
-    <div class="prow"><div class="num n1">1</div><div class="ptext">CVE Insurance Renewal — due Jun 19 · Contact Stephanie Haynes<div class="pproj">📁 Compliance</div></div></div>
-    <div class="prow"><div class="num n2">2</div><div class="ptext">Week 1: Insurance<div class="pproj">📁 Duckers &amp; Valley View Due Diligence</div></div></div>
-    <div class="prow"><div class="num n2">3</div><div class="ptext">Renew HE insurance — policy expires Jul 31<div class="pproj">📁 Hillsboro Property Management</div></div></div>
-    <div class="prow"><div class="num n2">4</div><div class="ptext">Foley Survey — ALTA requested by lender<div class="pproj">📁 Fiona-Cory Agenda only</div></div></div>
-    <div class="prow"><div class="num n2">5</div><div class="ptext">Insurance at Foley — get quotes, confirm lender requirements<div class="pproj">📁 Foley Refi</div></div></div>
+    <div class="prow"><div class="num n1">1</div><div class="ptext">CVE Insurance Renewal — due Jun 19 · Contact Stephanie Haynes<div class="pproj">Compliance</div></div></div>
+    <div class="prow"><div class="num n2">2</div><div class="ptext">Week 1: Insurance<div class="pproj">Duckers &amp; Valley View Due Diligence</div></div></div>
+    <div class="prow"><div class="num n2">3</div><div class="ptext">Renew HE insurance — policy expires Jul 31<div class="pproj">Hillsboro Property Management</div></div></div>
+    <div class="prow"><div class="num n2">4</div><div class="ptext">Foley Survey — ALTA requested by lender<div class="pproj">Fiona-Cory Agenda only</div></div></div>
+    <div class="prow"><div class="num n2">5</div><div class="ptext">Insurance at Foley — get quotes, confirm lender requirements<div class="pproj">Foley Refi</div></div></div>
     <div class="comment-section">
       <div class="comment-thread" id="thread-priorities"><div class="loading-comments">Loading comments...</div></div>
       <div class="comment-inputs">
@@ -130,7 +131,7 @@
   <div class="card">
     <div class="slabel">🏗 Project status</div>
     <div class="proj-grid">
-      <div class="proj-row"><div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="ppill pr">due Jun 19</span></div><div class="pupdate">Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pnext">→ Fiona to contact Stephanie to initiate renewal</div></div>
+      <div class="proj-row"><div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="ppill pr">due Jun 19</span></div><div class="pupdate">Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pnext">→ Contact Stephanie to initiate renewal</div></div>
       <div class="proj-row"><div class="proj-head"><div class="proj-name">Foley ALTA Survey</div><span class="ppill pg">in progress</span></div><div class="pupdate">CREtelligent signed ($9.5k, Jun 8). Title commitment sent Jun 15. Lender: First Tech FCU.</div><div class="pnext">→ Waiting on survey delivery</div></div>
       <div class="proj-row"><div class="proj-head"><div class="proj-name">HE Insurance Renewal</div><span class="ppill pa">in progress</span></div><div class="pupdate">Policy ZHSM077443 expires Jul 31. Worker's comp renewed Jun 8. Stephanie working on proposal.</div><div class="pnext">→ Waiting on Stephanie's proposal</div></div>
       <div class="proj-row"><div class="proj-head"><div class="proj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="ppill pm">not started</span></div><div class="pupdate">Moved to backlog. Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div><div class="pnext">→ Needs Cory's direction</div></div>
@@ -176,7 +177,7 @@
 
 </div>
 
-<div class="footer">Fiona-Cory Daily Executive Dashboard · June 17, 2026 · Freedom Investing Group</div>
+<div class="footer">Freedom Investing Group · Executive Dashboard · June 17, 2026 · Confidential</div>
 
 <script>
 const RELAY = 'https://fc-dashboard-relay.fiona-251.workers.dev';
