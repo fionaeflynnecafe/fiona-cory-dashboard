@@ -5,310 +5,258 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fiona-Cory Daily Executive Dashboard</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; padding: 1.5rem 1rem; }
-  .page { max-width: 720px; margin: 0 auto; }
-  .header { background: #fff; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; border: 1px solid #e8e8e8; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .header-left { display: flex; align-items: center; gap: 12px; }
-  .logo { width: 40px; height: 40px; border-radius: 10px; background: #4A154B; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0; }
-  .header-title { font-size: 18px; font-weight: 700; color: #1a1a1a; }
-  .header-sub { font-size: 13px; color: #888; margin-top: 2px; }
-  .header-date { font-size: 13px; color: #888; text-align: right; }
-  .card { background: #fff; border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; border: 1px solid #e8e8e8; }
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #aaa; margin-bottom: .75rem; display: flex; align-items: center; gap: 6px; }
-  .priority-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
-  .priority-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-  .n1 { background: #fee2e2; color: #b91c1c; }
-  .n2 { background: #fef3c7; color: #92400e; }
-  .priority-text { font-size: 14px; color: #1a1a1a; flex: 1; line-height: 1.45; }
-  .priority-project { font-size: 12px; color: #aaa; margin-top: 3px; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
-  .inbox-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
-  .inbox-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .inbox-folder { font-size: 13px; font-weight: 600; color: #1a1a1a; }
-  .inbox-ctx { font-size: 12px; color: #888; margin-top: 3px; line-height: 1.4; font-style: italic; }
-  .inbox-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; }
-  .badge-red { background: #fee2e2; color: #b91c1c; }
-  .badge-gray { background: #f3f4f6; color: #6b7280; }
-  .badge-blue { background: #dbeafe; color: #1d4ed8; }
-  .cal-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
-  .cal-row:last-child { border-bottom: none; }
-  .cal-time { font-size: 12px; color: #888; min-width: 100px; flex-shrink: 0; padding-top: 2px; line-height: 1.4; }
-  .cal-title { font-size: 14px; color: #1a1a1a; font-weight: 500; }
-  .cal-sub { font-size: 12px; color: #aaa; margin-top: 2px; font-style: italic; }
-  .proj-row { padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
-  .proj-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .proj-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .proj-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
-  .proj-pill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-  .pill-red { background: #fee2e2; color: #b91c1c; }
-  .pill-green { background: #d1fae5; color: #065f46; }
-  .pill-amber { background: #fef3c7; color: #92400e; }
-  .pill-gray { background: #f3f4f6; color: #6b7280; }
-  .proj-update { font-size: 13px; color: #555; line-height: 1.55; }
-  .proj-next { font-size: 12px; color: #aaa; margin-top: 4px; font-style: italic; }
-  .comment-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
-  .comment-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #ccc; margin-bottom: 8px; }
-  .comment-thread { margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; }
-  .comment-bubble { background: #f9f5fa; border-left: 3px solid #4A154B; border-radius: 0 8px 8px 0; padding: 10px 12px; }
-  .comment-bubble-meta { font-size: 11px; color: #aaa; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
-  .comment-bubble-author { font-weight: 700; color: #4A154B; }
-  .comment-bubble-text { font-size: 13px; color: #1a1a1a; line-height: 1.5; }
-  .comment-box textarea { width: 100%; padding: 10px 12px; border: 1px solid #e8e8e8; border-radius: 10px; font-size: 13px; font-family: inherit; color: #1a1a1a; resize: vertical; min-height: 68px; line-height: 1.5; transition: border-color .15s; }
-  .comment-box textarea:focus { outline: none; border-color: #4A154B; }
-  .comment-box textarea::placeholder { color: #ccc; }
-  .comment-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
-  .comment-hint { font-size: 11px; color: #ccc; }
-  .comment-btn { padding: 7px 16px; background: #4A154B; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .15s; }
-  .comment-btn:hover { opacity: .85; }
-  .comment-btn:disabled { opacity: .45; cursor: not-allowed; }
-  .footer { text-align: center; font-size: 12px; color: #ccc; padding: 1rem 0 .5rem; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;min-height:100vh;padding:1rem}
+  .header{background:#fff;border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem;border:1px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .logo{width:36px;height:36px;border-radius:9px;background:#4A154B;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+  .header-title{font-size:16px;font-weight:700;color:#1a1a1a}
+  .header-sub{font-size:12px;color:#aaa;margin-top:1px}
+  .header-date{font-size:12px;color:#aaa;text-align:right}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+  .grid-wide{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+  @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}.grid-wide{grid-template-columns:1fr}}
+  .card{background:#fff;border-radius:12px;padding:1rem 1.1rem;border:1px solid #e8e8e8;height:100%;display:flex;flex-direction:column}
+  .slabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin-bottom:.6rem;display:flex;align-items:center;gap:5px}
+  .prow{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid #f5f5f5}
+  .prow:last-of-type{border-bottom:none}
+  .num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+  .n1{background:#fee2e2;color:#b91c1c}
+  .n2{background:#fef3c7;color:#92400e}
+  .ptext{font-size:13px;color:#1a1a1a;flex:1;line-height:1.4}
+  .pproj{font-size:11px;color:#bbb;margin-top:2px}
+  .irow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid #f5f5f5}
+  .irow:last-of-type{border-bottom:none}
+  .ifolder{font-size:12px;font-weight:600;color:#1a1a1a}
+  .ictx{font-size:11px;color:#999;margin-top:2px;line-height:1.35;font-style:italic}
+  .ibadge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;flex-shrink:0;white-space:nowrap;margin-top:1px}
+  .br{background:#fee2e2;color:#b91c1c}
+  .bg{background:#f3f4f6;color:#6b7280}
+  .bb{background:#dbeafe;color:#1d4ed8}
+  .crow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f5f5f5}
+  .crow:last-of-type{border-bottom:none}
+  .ctime{font-size:11px;color:#aaa;min-width:88px;flex-shrink:0;padding-top:2px;line-height:1.35}
+  .ctitle{font-size:13px;color:#1a1a1a;font-weight:500}
+  .csub{font-size:11px;color:#bbb;margin-top:1px;font-style:italic}
+  .proj-row{padding:8px 0;border-bottom:1px solid #f5f5f5}
+  .proj-row:last-of-type{border-bottom:none}
+  .proj-head{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+  .proj-name{font-size:13px;font-weight:600;color:#1a1a1a}
+  .ppill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+  .pr{background:#fee2e2;color:#b91c1c}
+  .pg{background:#d1fae5;color:#065f46}
+  .pa{background:#fef3c7;color:#92400e}
+  .pm{background:#f3f4f6;color:#6b7280}
+  .pupdate{font-size:12px;color:#555;line-height:1.5}
+  .pnext{font-size:11px;color:#bbb;margin-top:3px;font-style:italic}
+  .comment-section{margin-top:auto;padding-top:.75rem;border-top:1px solid #f0f0f0}
+  .comment-thread{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+  .cbubble{padding:8px 10px;border-radius:8px;font-size:12px;line-height:1.45}
+  .cbubble-cory{background:#f9f5fa;border-left:3px solid #4A154B}
+  .cbubble-fiona{background:#f0f7ff;border-left:3px solid #1d4ed8}
+  .cbubble-meta{font-size:10px;margin-bottom:3px;display:flex;justify-content:space-between}
+  .cbubble-cory .cbubble-meta .author{color:#4A154B;font-weight:700}
+  .cbubble-fiona .cbubble-meta .author{color:#1d4ed8;font-weight:700}
+  .cbubble-meta .ctime2{color:#bbb}
+  .cbubble-text{color:#1a1a1a}
+  .comment-inputs{display:flex;flex-direction:column;gap:6px}
+  .comment-row{display:flex;gap:6px;align-items:flex-start}
+  .comment-row textarea{flex:1;padding:7px 10px;border:1px solid #e8e8e8;border-radius:8px;font-size:12px;font-family:inherit;color:#1a1a1a;resize:none;height:52px;line-height:1.4;transition:border-color .15s}
+  .comment-row textarea:focus{outline:none;border-color:#4A154B}
+  .comment-row textarea.fiona-ta:focus{border-color:#1d4ed8}
+  .comment-row textarea::placeholder{color:#ccc}
+  .cbtn{padding:6px 12px;border:none;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;transition:opacity .15s;white-space:nowrap;align-self:flex-end}
+  .cbtn-cory{background:#4A154B;color:#fff}
+  .cbtn-fiona{background:#1d4ed8;color:#fff}
+  .cbtn:hover{opacity:.85}
+  .cbtn:disabled{opacity:.4;cursor:not-allowed}
+  .sender-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+  .sl-cory{color:#4A154B}
+  .sl-fiona{color:#1d4ed8}
+  .footer{text-align:center;font-size:11px;color:#ccc;padding:.75rem 0 .25rem}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="header">
-    <div class="header-left">
-      <div class="logo">FC</div>
-      <div>
-        <div class="header-title">Fiona-Cory Daily Executive Dashboard</div>
-        <div class="header-sub">Prepared by Fiona · Freedom Investing Group</div>
-      </div>
-    </div>
-    <div class="header-date">Tuesday, June 16, 2026<br>Mountain Time</div>
-  </div>
-
-  <div class="card">
-    <div class="section-label">🚩 Top priorities</div>
-    <div class="priority-row">
-      <div class="num n1">1</div>
-      <div class="priority-text">CVE Insurance Renewal — due Jun 19 · Contact Stephanie Haynes
-        <div class="priority-project">📁 Compliance</div>
-      </div>
-    </div>
-    <div class="priority-row">
-      <div class="num n2">2</div>
-      <div class="priority-text">Week 1: Insurance
-        <div class="priority-project">📁 Duckers &amp; Valley View Due Diligence</div>
-      </div>
-    </div>
-    <div class="priority-row">
-      <div class="num n2">3</div>
-      <div class="priority-text">Renew HE insurance — policy expires Jul 31
-        <div class="priority-project">📁 Hillsboro Property Management</div>
-      </div>
-    </div>
-    <div class="priority-row">
-      <div class="num n2">4</div>
-      <div class="priority-text">Foley Survey — ALTA requested by lender
-        <div class="priority-project">📁 Fiona-Cory Agenda only</div>
-      </div>
-    </div>
-    <div class="priority-row">
-      <div class="num n2">5</div>
-      <div class="priority-text">Insurance at Foley — get quotes, confirm lender requirements
-        <div class="priority-project">📁 Foley Refi</div>
-      </div>
-    </div>
-    <div class="comment-box">
-      <div class="comment-label">Cory's notes</div>
-      <div class="comment-thread" id="thread-priorities"></div>
-      <textarea id="ta-priorities" placeholder="Add a comment on today's priorities..."></textarea>
-      <div class="comment-footer">
-        <span class="comment-hint">Visible to everyone · notifies Fiona on Slack</span>
-        <button class="comment-btn" onclick="sendComment('priorities', 'Top Priorities')">Send</button>
-      </div>
+<div class="header">
+  <div class="header-left">
+    <div class="logo">FC</div>
+    <div>
+      <div class="header-title">Fiona-Cory Daily Executive Dashboard</div>
+      <div class="header-sub">Freedom Investing Group · Prepared by Fiona</div>
     </div>
   </div>
-
-  <div class="two-col">
-    <div class="card">
-      <div class="section-label">📬 Cory's inbox</div>
-      <div class="inbox-row">
-        <div>
-          <div class="inbox-folder">! Cory please handle</div>
-          <div class="inbox-ctx">Morgan (Ocean Ridge Capital) — share insurance quotes &amp; limits, last DD item before investors lock in</div>
-        </div>
-        <span class="inbox-badge badge-red">1</span>
-      </div>
-      <div class="inbox-row">
-        <div>
-          <div class="inbox-folder">1. FYI</div>
-          <div class="inbox-ctx">Ryan &amp; Karla on WaterScope access + waterline map — Cory cc'd only</div>
-        </div>
-        <span class="inbox-badge badge-gray">1</span>
-      </div>
-      <div class="inbox-row">
-        <div>
-          <div class="inbox-folder">2. Fiona to respond</div>
-          <div class="inbox-ctx">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls, 2025 tax extensions; Ian Nobles also has financial info needed</div>
-        </div>
-        <span class="inbox-badge badge-blue">1</span>
-      </div>
-      <div class="inbox-row">
-        <div>
-          <div class="inbox-folder">3. Review</div>
-          <div class="inbox-ctx">Nothing today</div>
-        </div>
-        <span class="inbox-badge badge-gray">0</span>
-      </div>
-      <div class="comment-box">
-        <div class="comment-label">Cory's notes</div>
-        <div class="comment-thread" id="thread-inbox"></div>
-        <textarea id="ta-inbox" placeholder="Add a comment on inbox items..."></textarea>
-        <div class="comment-footer">
-          <span class="comment-hint">Visible to everyone · notifies Fiona on Slack</span>
-          <button class="comment-btn" onclick="sendComment('inbox', 'Inbox')">Send</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="section-label">📅 Meetings this week</div>
-      <div class="cal-row">
-        <div class="cal-time">Today 9:30 AM</div>
-        <div><div class="cal-title">Cory &lt;&gt; Yasha</div><div class="cal-sub">Blueprint Industrial Capital — first call, potential capital partner</div></div>
-      </div>
-      <div class="cal-row">
-        <div class="cal-time">Today 11:00 AM</div>
-        <div><div class="cal-title">Raise Masters Q&amp;A</div></div>
-      </div>
-      <div class="cal-row">
-        <div class="cal-time">Today 2:30 PM</div>
-        <div><div class="cal-title">Weekly Team Check In</div><div class="cal-sub">L10 — full team</div></div>
-      </div>
-      <div class="cal-row">
-        <div class="cal-time">Thu 1:15 PM</div>
-        <div><div class="cal-title">Fiona–Cory Sync</div></div>
-      </div>
-      <div class="cal-row">
-        <div class="cal-time">Thu 1:45 PM</div>
-        <div><div class="cal-title">Freedom Capital Call</div><div class="cal-sub">TN/CCH · Cory + Thomas</div></div>
-      </div>
-      <div class="cal-row">
-        <div class="cal-time">Fri 2:30 PM</div>
-        <div><div class="cal-title">FIG Improvement Meeting</div><div class="cal-sub">Cory, Karla, Thomas</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="section-label">🏗 Project status</div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="proj-pill pill-red">due Jun 19</span></div>
-      <div class="proj-update">Karla reassigned to Fiona on Jun 15. Two policies on file: commercial (ZHS J361331 02, $3,748) and park-owned homes (CD89863000, $3,062). Contact: Stephanie Haynes, Mobile Agency.</div>
-      <div class="proj-next">→ Fiona to contact Stephanie Haynes to initiate renewal</div>
-    </div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">Foley ALTA Survey</div><span class="proj-pill pill-green">in progress</span></div>
-      <div class="proj-update">Lender (First Tech FCU) required new ALTA. Fiona signed CREtelligent proposal ($9.5k, Jun 8). All info submitted: site contact, title, escrow, lender.</div>
-      <div class="proj-next">→ Title commitment sent Jun 15 — waiting on survey delivery</div>
-    </div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">HE Insurance Renewal</div><span class="proj-pill pill-amber">in progress</span></div>
-      <div class="proj-update">Policy ZHSM077443 expires Jul 31. Worker's comp renewed and paid Jun 8. Stephanie Haynes working on main policy proposal.</div>
-      <div class="proj-next">→ Waiting on Stephanie's proposal</div>
-    </div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="proj-pill pill-gray">not started</span></div>
-      <div class="proj-update">Moved to backlog. Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div>
-      <div class="proj-next">→ Needs Cory's direction on next steps</div>
-    </div>
-    <div class="comment-box">
-      <div class="comment-label">Cory's notes</div>
-      <div class="comment-thread" id="thread-projects"></div>
-      <textarea id="ta-projects" placeholder="Add a comment on project status..."></textarea>
-      <div class="comment-footer">
-        <span class="comment-hint">Visible to everyone · notifies Fiona on Slack</span>
-        <button class="comment-btn" onclick="sendComment('projects', 'Project Status')">Send</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">Fiona-Cory Daily Executive Dashboard · Generated Jun 16, 2026</div>
+  <div class="header-date">Tuesday, June 16, 2026<br>Mountain Time</div>
 </div>
 
-<script>
-const RELAY = 'https://fc-dashboard-relay.fiona-251.workers.dev/';
-const DATE = 'Tuesday, June 16, 2026';
-const DASHBOARD_URL = 'https://fionaeflynnecafe.github.io/fiona-cory-dashboard';
-const STORAGE_KEY = 'fc_comments_20260616';
+<div class="grid">
 
-function loadComments() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : { priorities: [], inbox: [], projects: [] };
-  } catch(e) { return { priorities: [], inbox: [], projects: [] }; }
-}
-
-function saveComments(data) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
-}
-
-function renderComments(section, comments) {
-  const thread = document.getElementById('thread-' + section);
-  if (!comments || comments.length === 0) { thread.innerHTML = ''; return; }
-  thread.innerHTML = comments.map(c => `
-    <div class="comment-bubble">
-      <div class="comment-bubble-meta">
-        <span class="comment-bubble-author">Cory</span>
-        <span>${c.time}</span>
+  <div class="card">
+    <div class="slabel">🚩 Top priorities</div>
+    <div class="prow"><div class="num n1">1</div><div class="ptext">CVE Insurance Renewal — due Jun 19<div class="pproj">📁 Compliance</div></div></div>
+    <div class="prow"><div class="num n2">2</div><div class="ptext">Week 1: Insurance<div class="pproj">📁 Duckers &amp; Valley View DD</div></div></div>
+    <div class="prow"><div class="num n2">3</div><div class="ptext">Renew HE insurance — expires Jul 31<div class="pproj">📁 Hillsboro Property Management</div></div></div>
+    <div class="prow"><div class="num n2">4</div><div class="ptext">Foley Survey — ALTA requested by lender<div class="pproj">📁 Fiona-Cory Agenda only</div></div></div>
+    <div class="prow"><div class="num n2">5</div><div class="ptext">Insurance at Foley — get quotes, confirm lender requirements<div class="pproj">📁 Foley Refi</div></div></div>
+    <div class="comment-section">
+      <div class="comment-thread" id="thread-priorities"></div>
+      <div class="comment-inputs">
+        <div>
+          <div class="sender-label sl-cory">Cory</div>
+          <div class="comment-row">
+            <textarea id="ta-cory-priorities" placeholder="Cory's note on priorities..."></textarea>
+            <button class="cbtn cbtn-cory" onclick="sendComment('priorities','Top Priorities','cory')">Send</button>
+          </div>
+        </div>
+        <div>
+          <div class="sender-label sl-fiona">Fiona</div>
+          <div class="comment-row">
+            <textarea id="ta-fiona-priorities" placeholder="Fiona's reply..."></textarea>
+            <button class="cbtn cbtn-fiona" onclick="sendComment('priorities','Top Priorities','fiona')">Send</button>
+          </div>
+        </div>
       </div>
-      <div class="comment-bubble-text">${c.text}</div>
     </div>
-  `).join('');
+  </div>
+
+  <div class="card">
+    <div class="slabel">📬 Cory's inbox</div>
+    <div class="irow"><div><div class="ifolder">! Cory please handle</div><div class="ictx">Morgan (Ocean Ridge Capital) — share insurance quotes &amp; limits, last DD item before investors lock in</div></div><span class="ibadge br">1</span></div>
+    <div class="irow"><div><div class="ifolder">1. FYI</div><div class="ictx">Ryan &amp; Karla on WaterScope access + waterline map — Cory cc'd only</div></div><span class="ibadge bg">1</span></div>
+    <div class="irow"><div><div class="ifolder">2. Fiona to respond</div><div class="ictx">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls, 2025 tax extensions; Ian Nobles also has financial info needed</div></div><span class="ibadge bb">1</span></div>
+    <div class="irow"><div><div class="ifolder">3. Review</div><div class="ictx">Nothing today</div></div><span class="ibadge bg">0</span></div>
+    <div class="comment-section">
+      <div class="comment-thread" id="thread-inbox"></div>
+      <div class="comment-inputs">
+        <div>
+          <div class="sender-label sl-cory">Cory</div>
+          <div class="comment-row">
+            <textarea id="ta-cory-inbox" placeholder="Cory's note on inbox..."></textarea>
+            <button class="cbtn cbtn-cory" onclick="sendComment('inbox','Inbox','cory')">Send</button>
+          </div>
+        </div>
+        <div>
+          <div class="sender-label sl-fiona">Fiona</div>
+          <div class="comment-row">
+            <textarea id="ta-fiona-inbox" placeholder="Fiona's reply..."></textarea>
+            <button class="cbtn cbtn-fiona" onclick="sendComment('inbox','Inbox','fiona')">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="slabel">📅 Meetings this week</div>
+    <div class="crow"><div class="ctime">Today 9:30 AM</div><div><div class="ctitle">Cory &lt;&gt; Yasha</div><div class="csub">Blueprint Industrial Capital — potential capital partner</div></div></div>
+    <div class="crow"><div class="ctime">Today 11:00 AM</div><div><div class="ctitle">Raise Masters Q&amp;A</div></div></div>
+    <div class="crow"><div class="ctime">Today 2:30 PM</div><div><div class="ctitle">Weekly Team Check In</div><div class="csub">L10 — full team</div></div></div>
+    <div class="crow"><div class="ctime">Thu 1:15 PM</div><div><div class="ctitle">Fiona–Cory Sync</div></div></div>
+    <div class="crow"><div class="ctime">Thu 1:45 PM</div><div><div class="ctitle">Freedom Capital Call</div><div class="csub">TN/CCH · Cory + Thomas</div></div></div>
+    <div class="crow"><div class="ctime">Fri 2:30 PM</div><div><div class="ctitle">FIG Improvement Meeting</div><div class="csub">Cory, Karla, Thomas</div></div></div>
+  </div>
+
+</div>
+
+<div class="card" style="margin-bottom:.75rem">
+  <div class="slabel">🏗 Project status</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.5rem 1.25rem">
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="ppill pr">due Jun 19</span></div>
+      <div class="pupdate">Karla reassigned to Fiona Jun 15. Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div>
+      <div class="pnext">→ Contact Stephanie to initiate</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">Foley ALTA Survey</div><span class="ppill pg">in progress</span></div>
+      <div class="pupdate">CREtelligent signed ($9.5k, Jun 8). All info submitted: site contact, title, escrow, lender (First Tech FCU).</div>
+      <div class="pnext">→ Title commitment sent Jun 15 — awaiting survey delivery</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">HE Insurance Renewal</div><span class="ppill pa">in progress</span></div>
+      <div class="pupdate">Policy ZHSM077443 expires Jul 31. Worker's comp renewed and paid Jun 8. Stephanie working on main policy proposal.</div>
+      <div class="pnext">→ Waiting on Stephanie's proposal</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="ppill pm">not started</span></div>
+      <div class="pupdate">Moved to backlog. Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div>
+      <div class="pnext">→ Needs Cory's direction</div>
+    </div>
+  </div>
+  <div class="comment-section" style="margin-top:.75rem">
+    <div class="comment-thread" id="thread-projects"></div>
+    <div class="comment-inputs" style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+      <div>
+        <div class="sender-label sl-cory">Cory</div>
+        <div class="comment-row">
+          <textarea id="ta-cory-projects" placeholder="Cory's note on projects..."></textarea>
+          <button class="cbtn cbtn-cory" onclick="sendComment('projects','Project Status','cory')">Send</button>
+        </div>
+      </div>
+      <div>
+        <div class="sender-label sl-fiona">Fiona</div>
+        <div class="comment-row">
+          <textarea id="ta-fiona-projects" placeholder="Fiona's reply..."></textarea>
+          <button class="cbtn cbtn-fiona" onclick="sendComment('projects','Project Status','fiona')">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Fiona-Cory Daily Executive Dashboard · June 16, 2026 · Freedom Investing Group</div>
+
+<script>
+const RELAY='https://fc-dashboard-relay.fiona-251.workers.dev/';
+const DATE='Tuesday, June 16, 2026';
+const DASHBOARD_URL='https://fionaeflynnecafe.github.io/fiona-cory-dashboard';
+const STORAGE_KEY='fc_comments_20260616';
+
+function loadComments(){try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):{priorities:[],inbox:[],projects:[]}}catch(e){return{priorities:[],inbox:[],projects:[]}}}
+function saveComments(d){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch(e){}}
+
+function renderComments(section,comments){
+  const thread=document.getElementById('thread-'+section);
+  if(!comments||comments.length===0){thread.innerHTML='';return;}
+  thread.innerHTML=comments.map(c=>`
+    <div class="cbubble cbubble-${c.author}">
+      <div class="cbubble-meta"><span class="author">${c.author==='cory'?'Cory':'Fiona'}</span><span class="ctime2">${c.time}</span></div>
+      <div class="cbubble-text">${c.text}</div>
+    </div>`).join('');
 }
 
-function initComments() {
-  const data = loadComments();
-  ['priorities','inbox','projects'].forEach(s => renderComments(s, data[s]));
+function initComments(){
+  const d=loadComments();
+  ['priorities','inbox','projects'].forEach(s=>renderComments(s,d[s]));
 }
 
-async function sendComment(section, label) {
-  const ta = document.getElementById('ta-' + section);
-  const btn = ta.closest('.comment-box').querySelector('.comment-btn');
-  const text = ta.value.trim();
-  if (!text) { ta.focus(); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Denver' }) + ' MT';
-
-  const blocks = [
-    { type: 'section', text: { type: 'mrkdwn', text: ':speech_balloon: *Cory left a comment on the Executive Dashboard*' } },
-    { type: 'section', fields: [
-      { type: 'mrkdwn', text: '*Section:*\n' + label },
-      { type: 'mrkdwn', text: '*Date:*\n' + DATE + ' · ' + timeStr }
+async function sendComment(section,label,author){
+  const ta=document.getElementById('ta-'+author+'-'+section);
+  const btn=ta.closest('.comment-row').querySelector('.cbtn');
+  const text=ta.value.trim();
+  if(!text){ta.focus();return;}
+  btn.disabled=true;btn.textContent='...';
+  const now=new Date();
+  const timeStr=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'America/Denver'})+' MT';
+  const senderName=author==='cory'?'Cory':'Fiona';
+  const emoji=author==='cory'?':speech_balloon:':':pencil:';
+  const blocks=[
+    {type:'section',text:{type:'mrkdwn',text:emoji+' *'+senderName+' commented on the Executive Dashboard*'}},
+    {type:'section',fields:[
+      {type:'mrkdwn',text:'*Section:*\n'+label},
+      {type:'mrkdwn',text:'*Time:*\n'+DATE+' · '+timeStr}
     ]},
-    { type: 'section', text: { type: 'mrkdwn', text: '*Comment:*\n' + text } },
-    { type: 'context', elements: [{ type: 'mrkdwn', text: '_View dashboard → ' + DASHBOARD_URL + '_' }] }
+    {type:'section',text:{type:'mrkdwn',text:'*Comment:*\n'+text}},
+    {type:'context',elements:[{type:'mrkdwn',text:'_View dashboard → '+DASHBOARD_URL+'_'}]}
   ];
-
-  try {
-    await fetch(RELAY, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ blocks })
-    });
-
-    const data = loadComments();
-    data[section].push({ text, time: timeStr });
-    saveComments(data);
-    renderComments(section, data[section]);
-
-    ta.value = '';
-    btn.textContent = 'Send';
-    btn.disabled = false;
-  } catch(e) {
-    btn.textContent = 'Send';
-    btn.disabled = false;
-    alert('Could not send. Please try again.');
-  }
+  try{
+    await fetch(RELAY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({blocks})});
+    const d=loadComments();
+    d[section].push({text,time:timeStr,author});
+    saveComments(d);
+    renderComments(section,d[section]);
+    ta.value='';btn.textContent='Send';btn.disabled=false;
+  }catch(e){btn.textContent='Send';btn.disabled=false;alert('Could not send. Try again.');}
 }
 
 initComments();
