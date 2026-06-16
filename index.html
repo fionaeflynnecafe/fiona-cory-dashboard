@@ -51,6 +51,11 @@
   .proj-next { font-size: 12px; color: #aaa; margin-top: 4px; font-style: italic; }
   .comment-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
   .comment-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #ccc; margin-bottom: 8px; }
+  .comment-thread { margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .comment-bubble { background: #f9f5fa; border-left: 3px solid #4A154B; border-radius: 0 8px 8px 0; padding: 10px 12px; }
+  .comment-bubble-meta { font-size: 11px; color: #aaa; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
+  .comment-bubble-author { font-weight: 700; color: #4A154B; }
+  .comment-bubble-text { font-size: 13px; color: #1a1a1a; line-height: 1.5; }
   .comment-box textarea { width: 100%; padding: 10px 12px; border: 1px solid #e8e8e8; border-radius: 10px; font-size: 13px; font-family: inherit; color: #1a1a1a; resize: vertical; min-height: 68px; line-height: 1.5; transition: border-color .15s; }
   .comment-box textarea:focus { outline: none; border-color: #4A154B; }
   .comment-box textarea::placeholder { color: #ccc; }
@@ -59,7 +64,6 @@
   .comment-btn { padding: 7px 16px; background: #4A154B; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .15s; }
   .comment-btn:hover { opacity: .85; }
   .comment-btn:disabled { opacity: .45; cursor: not-allowed; }
-  .comment-sent { font-size: 13px; color: #065f46; background: #d1fae5; border-radius: 8px; padding: 8px 12px; margin-top: 8px; display: none; }
   .footer { text-align: center; font-size: 12px; color: #ccc; padding: 1rem 0 .5rem; }
 </style>
 </head>
@@ -110,13 +114,13 @@
       </div>
     </div>
     <div class="comment-box">
-      <div class="comment-label">Cory's comment</div>
+      <div class="comment-label">Cory's notes</div>
+      <div class="comment-thread" id="thread-priorities"></div>
       <textarea id="ta-priorities" placeholder="Add a comment on today's priorities..."></textarea>
       <div class="comment-footer">
-        <span class="comment-hint">Sends a notification to Fiona on Slack</span>
+        <span class="comment-hint">Visible to everyone · notifies Fiona on Slack</span>
         <button class="comment-btn" onclick="sendComment('priorities', 'Top Priorities')">Send</button>
       </div>
-      <div class="comment-sent" id="sent-priorities">✓ Comment sent to Fiona on Slack!</div>
     </div>
   </div>
 
@@ -152,13 +156,13 @@
         <span class="inbox-badge badge-gray">0</span>
       </div>
       <div class="comment-box">
-        <div class="comment-label">Cory's comment</div>
+        <div class="comment-label">Cory's notes</div>
+        <div class="comment-thread" id="thread-inbox"></div>
         <textarea id="ta-inbox" placeholder="Add a comment on inbox items..."></textarea>
         <div class="comment-footer">
-          <span class="comment-hint">Sends a notification to Fiona on Slack</span>
+          <span class="comment-hint">Visible to everyone · notifies Fiona on Slack</span>
           <button class="comment-btn" onclick="sendComment('inbox', 'Inbox')">Send</button>
         </div>
-        <div class="comment-sent" id="sent-inbox">✓ Comment sent to Fiona on Slack!</div>
       </div>
     </div>
 
@@ -214,13 +218,13 @@
       <div class="proj-next">→ Needs Cory's direction on next steps</div>
     </div>
     <div class="comment-box">
-      <div class="comment-label">Cory's comment</div>
+      <div class="comment-label">Cory's notes</div>
+      <div class="comment-thread" id="thread-projects"></div>
       <textarea id="ta-projects" placeholder="Add a comment on project status..."></textarea>
       <div class="comment-footer">
-        <span class="comment-hint">Sends a notification to Fiona on Slack</span>
+        <span class="comment-hint">Visible to everyone · notifies Fiona on Slack</span>
         <button class="comment-btn" onclick="sendComment('projects', 'Project Status')">Send</button>
       </div>
-      <div class="comment-sent" id="sent-projects">✓ Comment sent to Fiona on Slack!</div>
     </div>
   </div>
 
@@ -231,41 +235,83 @@
 const RELAY = 'https://fc-dashboard-relay.fiona-251.workers.dev/';
 const DATE = 'Tuesday, June 16, 2026';
 const DASHBOARD_URL = 'https://fionaeflynnecafe.github.io/fiona-cory-dashboard';
+const STORAGE_KEY = 'fc_comments_20260616';
+
+function loadComments() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : { priorities: [], inbox: [], projects: [] };
+  } catch(e) { return { priorities: [], inbox: [], projects: [] }; }
+}
+
+function saveComments(data) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function renderComments(section, comments) {
+  const thread = document.getElementById('thread-' + section);
+  if (!comments || comments.length === 0) { thread.innerHTML = ''; return; }
+  thread.innerHTML = comments.map(c => `
+    <div class="comment-bubble">
+      <div class="comment-bubble-meta">
+        <span class="comment-bubble-author">Cory</span>
+        <span>${c.time}</span>
+      </div>
+      <div class="comment-bubble-text">${c.text}</div>
+    </div>
+  `).join('');
+}
+
+function initComments() {
+  const data = loadComments();
+  ['priorities','inbox','projects'].forEach(s => renderComments(s, data[s]));
+}
 
 async function sendComment(section, label) {
   const ta = document.getElementById('ta-' + section);
   const btn = ta.closest('.comment-box').querySelector('.comment-btn');
-  const sent = document.getElementById('sent-' + section);
   const text = ta.value.trim();
   if (!text) { ta.focus(); return; }
+
   btn.disabled = true;
   btn.textContent = 'Sending...';
+
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Denver' }) + ' MT';
+
   const blocks = [
     { type: 'section', text: { type: 'mrkdwn', text: ':speech_balloon: *Cory left a comment on the Executive Dashboard*' } },
     { type: 'section', fields: [
       { type: 'mrkdwn', text: '*Section:*\n' + label },
-      { type: 'mrkdwn', text: '*Date:*\n' + DATE }
+      { type: 'mrkdwn', text: '*Date:*\n' + DATE + ' · ' + timeStr }
     ]},
     { type: 'section', text: { type: 'mrkdwn', text: '*Comment:*\n' + text } },
     { type: 'context', elements: [{ type: 'mrkdwn', text: '_View dashboard → ' + DASHBOARD_URL + '_' }] }
   ];
+
   try {
     await fetch(RELAY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ blocks })
     });
+
+    const data = loadComments();
+    data[section].push({ text, time: timeStr });
+    saveComments(data);
+    renderComments(section, data[section]);
+
     ta.value = '';
     btn.textContent = 'Send';
     btn.disabled = false;
-    sent.style.display = 'block';
-    setTimeout(() => sent.style.display = 'none', 4000);
   } catch(e) {
     btn.textContent = 'Send';
     btn.disabled = false;
     alert('Could not send. Please try again.');
   }
 }
+
+initComments();
 </script>
 </body>
 </html>
