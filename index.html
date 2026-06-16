@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiona-Cory Daily Executive Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; padding: 1.5rem 1rem; }
+  .page { max-width: 720px; margin: 0 auto; }
+  .header { background: #fff; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; border: 1px solid #e8e8e8; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .logo { width: 40px; height: 40px; border-radius: 10px; background: #4A154B; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+  .header-title { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+  .header-sub { font-size: 13px; color: #888; margin-top: 2px; }
+  .header-date { font-size: 13px; color: #888; text-align: right; }
+  .card { background: #fff; border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; border: 1px solid #e8e8e8; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #aaa; margin-bottom: .75rem; display: flex; align-items: center; gap: 6px; }
+  .priority-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
+  .priority-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .n1 { background: #fee2e2; color: #b91c1c; }
+  .n2 { background: #fef3c7; color: #92400e; }
+  .priority-text { font-size: 14px; color: #1a1a1a; flex: 1; line-height: 1.45; }
+  .priority-project { font-size: 12px; color: #aaa; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+  .inbox-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
+  .inbox-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .inbox-folder { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+  .inbox-ctx { font-size: 12px; color: #888; margin-top: 3px; line-height: 1.4; font-style: italic; }
+  .inbox-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; }
+  .badge-red { background: #fee2e2; color: #b91c1c; }
+  .badge-gray { background: #f3f4f6; color: #6b7280; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .cal-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .cal-row:last-child { border-bottom: none; }
+  .cal-time { font-size: 12px; color: #888; min-width: 100px; flex-shrink: 0; padding-top: 2px; line-height: 1.4; }
+  .cal-title { font-size: 14px; color: #1a1a1a; font-weight: 500; }
+  .cal-sub { font-size: 12px; color: #aaa; margin-top: 2px; font-style: italic; }
+  .proj-row { padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+  .proj-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .proj-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .proj-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+  .proj-pill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+  .pill-red { background: #fee2e2; color: #b91c1c; }
+  .pill-green { background: #d1fae5; color: #065f46; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .pill-gray { background: #f3f4f6; color: #6b7280; }
+  .proj-update { font-size: 13px; color: #555; line-height: 1.55; }
+  .proj-next { font-size: 12px; color: #aaa; margin-top: 4px; font-style: italic; }
+  .footer { text-align: center; font-size: 12px; color: #ccc; padding: 1rem 0 .5rem; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">FC</div>
+      <div>
+        <div class="header-title">Fiona-Cory Daily Executive Dashboard</div>
+        <div class="header-sub">Prepared by Fiona · Freedom Investing Group</div>
+      </div>
+    </div>
+    <div class="header-date">Tuesday, June 16, 2026<br>Mountain Time</div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">🚩 Top priorities</div>
+    <div class="priority-row">
+      <div class="num n1">1</div>
+      <div class="priority-text">CVE Insurance Renewal — due Jun 19 · Contact Stephanie Haynes
+        <div class="priority-project">📁 Compliance</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="num n2">2</div>
+      <div class="priority-text">Week 1: Insurance
+        <div class="priority-project">📁 Duckers &amp; Valley View Due Diligence</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="num n2">3</div>
+      <div class="priority-text">Renew HE insurance — policy expires Jul 31
+        <div class="priority-project">📁 Hillsboro Property Management</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="num n2">4</div>
+      <div class="priority-text">Foley Survey — ALTA requested by lender
+        <div class="priority-project">📁 Fiona-Cory Agenda only</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="num n2">5</div>
+      <div class="priority-text">Insurance at Foley — get quotes, confirm lender requirements
+        <div class="priority-project">📁 Foley Refi</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="section-label">📬 Cory's inbox</div>
+      <div class="inbox-row">
+        <div>
+          <div class="inbox-folder">! Cory please handle</div>
+          <div class="inbox-ctx">Morgan (Ocean Ridge Capital) — share insurance quotes &amp; limits, last DD item before investors lock in</div>
+        </div>
+        <span class="inbox-badge badge-red">1</span>
+      </div>
+      <div class="inbox-row">
+        <div>
+          <div class="inbox-folder">1. FYI</div>
+          <div class="inbox-ctx">Ryan &amp; Karla on WaterScope access + waterline map — Cory cc'd only</div>
+        </div>
+        <span class="inbox-badge badge-gray">1</span>
+      </div>
+      <div class="inbox-row">
+        <div>
+          <div class="inbox-folder">2. Fiona to respond</div>
+          <div class="inbox-ctx">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls, 2025 tax extensions; Ian Nobles also has financial info needed</div>
+        </div>
+        <span class="inbox-badge badge-blue">1</span>
+      </div>
+      <div class="inbox-row">
+        <div>
+          <div class="inbox-folder">3. Review</div>
+          <div class="inbox-ctx">Nothing today</div>
+        </div>
+        <span class="inbox-badge badge-gray">0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-label">📅 Meetings this week</div>
+      <div class="cal-row">
+        <div class="cal-time">Today 9:30 AM</div>
+        <div><div class="cal-title">Cory &lt;&gt; Yasha</div><div class="cal-sub">Blueprint Industrial Capital — first call, potential capital partner</div></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-time">Today 11:00 AM</div>
+        <div><div class="cal-title">Raise Masters Q&amp;A</div></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-time">Today 2:30 PM</div>
+        <div><div class="cal-title">Weekly Team Check In</div><div class="cal-sub">L10 — full team</div></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-time">Thu 1:15 PM</div>
+        <div><div class="cal-title">Fiona–Cory Sync</div></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-time">Thu 1:45 PM</div>
+        <div><div class="cal-title">Freedom Capital Call</div><div class="cal-sub">TN/CCH · Cory + Thomas</div></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-time">Fri 2:30 PM</div>
+        <div><div class="cal-title">FIG Improvement Meeting</div><div class="cal-sub">Cory, Karla, Thomas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">🏗 Project status</div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="proj-pill pill-red">due Jun 19</span></div>
+      <div class="proj-update">Karla reassigned to Fiona on Jun 15. Two policies on file: commercial (ZHS J361331 02, $3,748) and park-owned homes (CD89863000, $3,062). Contact: Stephanie Haynes, Mobile Agency.</div>
+      <div class="proj-next">→ Fiona to contact Stephanie Haynes to initiate renewal</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">Foley ALTA Survey</div><span class="proj-pill pill-green">in progress</span></div>
+      <div class="proj-update">Lender (First Tech FCU) required new ALTA. Fiona signed CREtelligent proposal ($9.5k, Jun 8). All info submitted: site contact, title, escrow, lender.</div>
+      <div class="proj-next">→ Title commitment sent Jun 15 — waiting on survey delivery</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">HE Insurance Renewal</div><span class="proj-pill pill-amber">in progress</span></div>
+      <div class="proj-update">Policy ZHSM077443 expires Jul 31. Worker's comp renewed and paid Jun 8. Stephanie Haynes working on main policy proposal.</div>
+      <div class="proj-next">→ Waiting on Stephanie's proposal</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-head"><div class="proj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="proj-pill pill-gray">not started</span></div>
+      <div class="proj-update">Moved to backlog. Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div>
+      <div class="proj-next">→ Needs Cory's direction on next steps</div>
+    </div>
+  </div>
+
+  <div class="footer">Fiona-Cory Daily Executive Dashboard · Generated Jun 16, 2026</div>
+</div>
+</body>
+</html>
