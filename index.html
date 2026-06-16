@@ -14,16 +14,14 @@
   .header-sub{font-size:12px;color:#aaa;margin-top:1px}
   .header-date{font-size:12px;color:#aaa;text-align:right}
   .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:.75rem}
-  .grid-wide{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
   @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:600px){.grid{grid-template-columns:1fr}.grid-wide{grid-template-columns:1fr}}
-  .card{background:#fff;border-radius:12px;padding:1rem 1.1rem;border:1px solid #e8e8e8;height:100%;display:flex;flex-direction:column}
-  .slabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin-bottom:.6rem;display:flex;align-items:center;gap:5px}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border-radius:12px;padding:1rem 1.1rem;border:1px solid #e8e8e8;display:flex;flex-direction:column}
+  .slabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin-bottom:.6rem}
   .prow{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid #f5f5f5}
   .prow:last-of-type{border-bottom:none}
   .num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
-  .n1{background:#fee2e2;color:#b91c1c}
-  .n2{background:#fef3c7;color:#92400e}
+  .n1{background:#fee2e2;color:#b91c1c}.n2{background:#fef3c7;color:#92400e}
   .ptext{font-size:13px;color:#1a1a1a;flex:1;line-height:1.4}
   .pproj{font-size:11px;color:#bbb;margin-top:2px}
   .irow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid #f5f5f5}
@@ -31,9 +29,7 @@
   .ifolder{font-size:12px;font-weight:600;color:#1a1a1a}
   .ictx{font-size:11px;color:#999;margin-top:2px;line-height:1.35;font-style:italic}
   .ibadge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;flex-shrink:0;white-space:nowrap;margin-top:1px}
-  .br{background:#fee2e2;color:#b91c1c}
-  .bg{background:#f3f4f6;color:#6b7280}
-  .bb{background:#dbeafe;color:#1d4ed8}
+  .br{background:#fee2e2;color:#b91c1c}.bg{background:#f3f4f6;color:#6b7280}.bb{background:#dbeafe;color:#1d4ed8}
   .crow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f5f5f5}
   .crow:last-of-type{border-bottom:none}
   .ctime{font-size:11px;color:#aaa;min-width:88px;flex-shrink:0;padding-top:2px;line-height:1.35}
@@ -44,41 +40,37 @@
   .proj-head{display:flex;align-items:center;gap:7px;margin-bottom:3px}
   .proj-name{font-size:13px;font-weight:600;color:#1a1a1a}
   .ppill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
-  .pr{background:#fee2e2;color:#b91c1c}
-  .pg{background:#d1fae5;color:#065f46}
-  .pa{background:#fef3c7;color:#92400e}
-  .pm{background:#f3f4f6;color:#6b7280}
+  .pr{background:#fee2e2;color:#b91c1c}.pg{background:#d1fae5;color:#065f46}
+  .pa{background:#fef3c7;color:#92400e}.pm{background:#f3f4f6;color:#6b7280}
   .pupdate{font-size:12px;color:#555;line-height:1.5}
   .pnext{font-size:11px;color:#bbb;margin-top:3px;font-style:italic}
   .comment-section{margin-top:auto;padding-top:.75rem;border-top:1px solid #f0f0f0}
-  .comment-thread{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+  .comment-thread{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;min-height:0}
   .cbubble{padding:8px 10px;border-radius:8px;font-size:12px;line-height:1.45}
   .cbubble-cory{background:#f9f5fa;border-left:3px solid #4A154B}
   .cbubble-fiona{background:#f0f7ff;border-left:3px solid #1d4ed8}
   .cbubble-meta{font-size:10px;margin-bottom:3px;display:flex;justify-content:space-between}
-  .cbubble-cory .cbubble-meta .author{color:#4A154B;font-weight:700}
-  .cbubble-fiona .cbubble-meta .author{color:#1d4ed8;font-weight:700}
-  .cbubble-meta .ctime2{color:#bbb}
+  .cbubble-cory .author{color:#4A154B;font-weight:700}
+  .cbubble-fiona .author{color:#1d4ed8;font-weight:700}
+  .ctime2{color:#bbb}
   .cbubble-text{color:#1a1a1a}
   .comment-inputs{display:flex;flex-direction:column;gap:6px}
   .comment-row{display:flex;gap:6px;align-items:flex-start}
   .comment-row textarea{flex:1;padding:7px 10px;border:1px solid #e8e8e8;border-radius:8px;font-size:12px;font-family:inherit;color:#1a1a1a;resize:none;height:52px;line-height:1.4;transition:border-color .15s}
   .comment-row textarea:focus{outline:none;border-color:#4A154B}
-  .comment-row textarea.fiona-ta:focus{border-color:#1d4ed8}
+  .fiona-ta:focus{border-color:#1d4ed8!important}
   .comment-row textarea::placeholder{color:#ccc}
   .cbtn{padding:6px 12px;border:none;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;transition:opacity .15s;white-space:nowrap;align-self:flex-end}
   .cbtn-cory{background:#4A154B;color:#fff}
   .cbtn-fiona{background:#1d4ed8;color:#fff}
-  .cbtn:hover{opacity:.85}
-  .cbtn:disabled{opacity:.4;cursor:not-allowed}
+  .cbtn:hover{opacity:.85}.cbtn:disabled{opacity:.4;cursor:not-allowed}
   .sender-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
-  .sl-cory{color:#4A154B}
-  .sl-fiona{color:#1d4ed8}
+  .sl-cory{color:#4A154B}.sl-fiona{color:#1d4ed8}
+  .loading-comments{font-size:11px;color:#ccc;font-style:italic;padding:4px 0}
   .footer{text-align:center;font-size:11px;color:#ccc;padding:.75rem 0 .25rem}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-left">
     <div class="logo">FC</div>
@@ -87,35 +79,22 @@
       <div class="header-sub">Freedom Investing Group · Prepared by Fiona</div>
     </div>
   </div>
-  <div class="header-date">Tuesday, June 16, 2026<br>Mountain Time</div>
+  <div class="header-date">Tuesday, June 17, 2026<br>Mountain Time</div>
 </div>
 
 <div class="grid">
-
   <div class="card">
     <div class="slabel">🚩 Top priorities</div>
     <div class="prow"><div class="num n1">1</div><div class="ptext">CVE Insurance Renewal — due Jun 19<div class="pproj">📁 Compliance</div></div></div>
     <div class="prow"><div class="num n2">2</div><div class="ptext">Week 1: Insurance<div class="pproj">📁 Duckers &amp; Valley View DD</div></div></div>
     <div class="prow"><div class="num n2">3</div><div class="ptext">Renew HE insurance — expires Jul 31<div class="pproj">📁 Hillsboro Property Management</div></div></div>
     <div class="prow"><div class="num n2">4</div><div class="ptext">Foley Survey — ALTA requested by lender<div class="pproj">📁 Fiona-Cory Agenda only</div></div></div>
-    <div class="prow"><div class="num n2">5</div><div class="ptext">Insurance at Foley — get quotes, confirm lender requirements<div class="pproj">📁 Foley Refi</div></div></div>
+    <div class="prow"><div class="num n2">5</div><div class="ptext">Insurance at Foley<div class="pproj">📁 Foley Refi</div></div></div>
     <div class="comment-section">
-      <div class="comment-thread" id="thread-priorities"></div>
+      <div class="comment-thread" id="thread-priorities"><div class="loading-comments">Loading comments...</div></div>
       <div class="comment-inputs">
-        <div>
-          <div class="sender-label sl-cory">Cory</div>
-          <div class="comment-row">
-            <textarea id="ta-cory-priorities" placeholder="Cory's note on priorities..."></textarea>
-            <button class="cbtn cbtn-cory" onclick="sendComment('priorities','Top Priorities','cory')">Send</button>
-          </div>
-        </div>
-        <div>
-          <div class="sender-label sl-fiona">Fiona</div>
-          <div class="comment-row">
-            <textarea id="ta-fiona-priorities" placeholder="Fiona's reply..."></textarea>
-            <button class="cbtn cbtn-fiona" onclick="sendComment('priorities','Top Priorities','fiona')">Send</button>
-          </div>
-        </div>
+        <div><div class="sender-label sl-cory">Cory</div><div class="comment-row"><textarea id="ta-cory-priorities" placeholder="Cory's note..."></textarea><button class="cbtn cbtn-cory" onclick="sendComment('priorities','Top Priorities','cory')">Send</button></div></div>
+        <div><div class="sender-label sl-fiona">Fiona</div><div class="comment-row"><textarea id="ta-fiona-priorities" class="fiona-ta" placeholder="Fiona's reply..."></textarea><button class="cbtn cbtn-fiona" onclick="sendComment('priorities','Top Priorities','fiona')">Send</button></div></div>
       </div>
     </div>
   </div>
@@ -124,142 +103,116 @@
     <div class="slabel">📬 Cory's inbox</div>
     <div class="irow"><div><div class="ifolder">! Cory please handle</div><div class="ictx">Morgan (Ocean Ridge Capital) — share insurance quotes &amp; limits, last DD item before investors lock in</div></div><span class="ibadge br">1</span></div>
     <div class="irow"><div><div class="ifolder">1. FYI</div><div class="ictx">Ryan &amp; Karla on WaterScope access + waterline map — Cory cc'd only</div></div><span class="ibadge bg">1</span></div>
-    <div class="irow"><div><div class="ifolder">2. Fiona to respond</div><div class="ictx">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls, 2025 tax extensions; Ian Nobles also has financial info needed</div></div><span class="ibadge bb">1</span></div>
+    <div class="irow"><div><div class="ifolder">2. Fiona to respond</div><div class="ictx">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls, 2025 tax extensions</div></div><span class="ibadge bb">1</span></div>
     <div class="irow"><div><div class="ifolder">3. Review</div><div class="ictx">Nothing today</div></div><span class="ibadge bg">0</span></div>
     <div class="comment-section">
-      <div class="comment-thread" id="thread-inbox"></div>
+      <div class="comment-thread" id="thread-inbox"><div class="loading-comments">Loading comments...</div></div>
       <div class="comment-inputs">
-        <div>
-          <div class="sender-label sl-cory">Cory</div>
-          <div class="comment-row">
-            <textarea id="ta-cory-inbox" placeholder="Cory's note on inbox..."></textarea>
-            <button class="cbtn cbtn-cory" onclick="sendComment('inbox','Inbox','cory')">Send</button>
-          </div>
-        </div>
-        <div>
-          <div class="sender-label sl-fiona">Fiona</div>
-          <div class="comment-row">
-            <textarea id="ta-fiona-inbox" placeholder="Fiona's reply..."></textarea>
-            <button class="cbtn cbtn-fiona" onclick="sendComment('inbox','Inbox','fiona')">Send</button>
-          </div>
-        </div>
+        <div><div class="sender-label sl-cory">Cory</div><div class="comment-row"><textarea id="ta-cory-inbox" placeholder="Cory's note..."></textarea><button class="cbtn cbtn-cory" onclick="sendComment('inbox','Inbox','cory')">Send</button></div></div>
+        <div><div class="sender-label sl-fiona">Fiona</div><div class="comment-row"><textarea id="ta-fiona-inbox" class="fiona-ta" placeholder="Fiona's reply..."></textarea><button class="cbtn cbtn-fiona" onclick="sendComment('inbox','Inbox','fiona')">Send</button></div></div>
       </div>
     </div>
   </div>
 
   <div class="card">
     <div class="slabel">📅 Meetings this week</div>
-    <div class="crow"><div class="ctime">Today 9:30 AM</div><div><div class="ctitle">Cory &lt;&gt; Yasha</div><div class="csub">Blueprint Industrial Capital — potential capital partner</div></div></div>
+    <div class="crow"><div class="ctime">Today 9:30 AM</div><div><div class="ctitle">Cory &lt;&gt; Yasha</div><div class="csub">Blueprint Industrial Capital</div></div></div>
     <div class="crow"><div class="ctime">Today 11:00 AM</div><div><div class="ctitle">Raise Masters Q&amp;A</div></div></div>
     <div class="crow"><div class="ctime">Today 2:30 PM</div><div><div class="ctitle">Weekly Team Check In</div><div class="csub">L10 — full team</div></div></div>
     <div class="crow"><div class="ctime">Thu 1:15 PM</div><div><div class="ctitle">Fiona–Cory Sync</div></div></div>
     <div class="crow"><div class="ctime">Thu 1:45 PM</div><div><div class="ctitle">Freedom Capital Call</div><div class="csub">TN/CCH · Cory + Thomas</div></div></div>
-    <div class="crow"><div class="ctime">Fri 2:30 PM</div><div><div class="ctitle">FIG Improvement Meeting</div><div class="csub">Cory, Karla, Thomas</div></div></div>
+    <div class="crow"><div class="ctime">Fri 2:30 PM</div><div><div class="ctitle">FIG Improvement Meeting</div></div></div>
   </div>
-
 </div>
 
 <div class="card" style="margin-bottom:.75rem">
   <div class="slabel">🏗 Project status</div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.5rem 1.25rem">
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="ppill pr">due Jun 19</span></div>
-      <div class="pupdate">Karla reassigned to Fiona Jun 15. Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div>
-      <div class="pnext">→ Contact Stephanie to initiate</div>
-    </div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">Foley ALTA Survey</div><span class="ppill pg">in progress</span></div>
-      <div class="pupdate">CREtelligent signed ($9.5k, Jun 8). All info submitted: site contact, title, escrow, lender (First Tech FCU).</div>
-      <div class="pnext">→ Title commitment sent Jun 15 — awaiting survey delivery</div>
-    </div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">HE Insurance Renewal</div><span class="ppill pa">in progress</span></div>
-      <div class="pupdate">Policy ZHSM077443 expires Jul 31. Worker's comp renewed and paid Jun 8. Stephanie working on main policy proposal.</div>
-      <div class="pnext">→ Waiting on Stephanie's proposal</div>
-    </div>
-    <div class="proj-row">
-      <div class="proj-head"><div class="proj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="ppill pm">not started</span></div>
-      <div class="pupdate">Moved to backlog. Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div>
-      <div class="pnext">→ Needs Cory's direction</div>
-    </div>
+    <div class="proj-row"><div class="proj-head"><div class="proj-name">CVE Insurance Renewal</div><span class="ppill pr">due Jun 19</span></div><div class="pupdate">Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pnext">→ Contact Stephanie to initiate</div></div>
+    <div class="proj-row"><div class="proj-head"><div class="proj-name">Foley ALTA Survey</div><span class="ppill pg">in progress</span></div><div class="pupdate">CREtelligent signed ($9.5k, Jun 8). Title commitment sent Jun 15.</div><div class="pnext">→ Awaiting survey delivery</div></div>
+    <div class="proj-row"><div class="proj-head"><div class="proj-name">HE Insurance Renewal</div><span class="ppill pa">in progress</span></div><div class="pupdate">Policy ZHSM077443 expires Jul 31. Worker's comp done Jun 8.</div><div class="pnext">→ Waiting on Stephanie's proposal</div></div>
+    <div class="proj-row"><div class="proj-head"><div class="proj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="ppill pm">not started</span></div><div class="pupdate">Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div><div class="pnext">→ Needs Cory's direction</div></div>
   </div>
   <div class="comment-section" style="margin-top:.75rem">
-    <div class="comment-thread" id="thread-projects"></div>
+    <div class="comment-thread" id="thread-projects"><div class="loading-comments">Loading comments...</div></div>
     <div class="comment-inputs" style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-      <div>
-        <div class="sender-label sl-cory">Cory</div>
-        <div class="comment-row">
-          <textarea id="ta-cory-projects" placeholder="Cory's note on projects..."></textarea>
-          <button class="cbtn cbtn-cory" onclick="sendComment('projects','Project Status','cory')">Send</button>
-        </div>
-      </div>
-      <div>
-        <div class="sender-label sl-fiona">Fiona</div>
-        <div class="comment-row">
-          <textarea id="ta-fiona-projects" placeholder="Fiona's reply..."></textarea>
-          <button class="cbtn cbtn-fiona" onclick="sendComment('projects','Project Status','fiona')">Send</button>
-        </div>
-      </div>
+      <div><div class="sender-label sl-cory">Cory</div><div class="comment-row"><textarea id="ta-cory-projects" placeholder="Cory's note..."></textarea><button class="cbtn cbtn-cory" onclick="sendComment('projects','Project Status','cory')">Send</button></div></div>
+      <div><div class="sender-label sl-fiona">Fiona</div><div class="comment-row"><textarea id="ta-fiona-projects" class="fiona-ta" placeholder="Fiona's reply..."></textarea><button class="cbtn cbtn-fiona" onclick="sendComment('projects','Project Status','fiona')">Send</button></div></div>
     </div>
   </div>
 </div>
 
-<div class="footer">Fiona-Cory Daily Executive Dashboard · June 16, 2026 · Freedom Investing Group</div>
+<div class="footer">Fiona-Cory Daily Executive Dashboard · June 17, 2026 · Freedom Investing Group</div>
 
 <script>
-const RELAY='https://fc-dashboard-relay.fiona-251.workers.dev/';
-const DATE='Tuesday, June 16, 2026';
-const DASHBOARD_URL='https://fionaeflynnecafe.github.io/fiona-cory-dashboard';
-const STORAGE_KEY='fc_comments_20260616';
+const RELAY = 'https://fc-dashboard-relay.fiona-251.workers.dev';
+const DASHBOARD_DATE = '2026-06-17';
+const DATE_LABEL = 'Wednesday, June 17, 2026';
+const DASHBOARD_URL = 'https://fionaeflynnecafe.github.io/fiona-cory-dashboard';
 
-function loadComments(){try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):{priorities:[],inbox:[],projects:[]}}catch(e){return{priorities:[],inbox:[],projects:[]}}}
-function saveComments(d){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch(e){}}
-
-function renderComments(section,comments){
-  const thread=document.getElementById('thread-'+section);
-  if(!comments||comments.length===0){thread.innerHTML='';return;}
-  thread.innerHTML=comments.map(c=>`
-    <div class="cbubble cbubble-${c.author}">
-      <div class="cbubble-meta"><span class="author">${c.author==='cory'?'Cory':'Fiona'}</span><span class="ctime2">${c.time}</span></div>
-      <div class="cbubble-text">${c.text}</div>
-    </div>`).join('');
+function renderComments(section, comments) {
+  const thread = document.getElementById('thread-' + section);
+  if (!comments || comments.length === 0) {
+    thread.innerHTML = '';
+    return;
+  }
+  thread.innerHTML = comments.map(c => {
+    const cls = c.author === 'cory' ? 'cbubble-cory' : 'cbubble-fiona';
+    const name = c.author === 'cory' ? 'Cory' : 'Fiona';
+    const t = new Date(c.created_at).toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit',hour12:true,timeZone:'America/Denver'}) + ' MT';
+    return '<div class="cbubble ' + cls + '"><div class="cbubble-meta"><span class="author">' + name + '</span><span class="ctime2">' + t + '</span></div><div class="cbubble-text">' + c.message + '</div></div>';
+  }).join('');
 }
 
-function initComments(){
-  const d=loadComments();
-  ['priorities','inbox','projects'].forEach(s=>renderComments(s,d[s]));
+async function loadComments() {
+  try {
+    const res = await fetch(RELAY + '/comments?date=' + DASHBOARD_DATE);
+    const data = await res.json();
+    const grouped = { priorities: [], inbox: [], projects: [] };
+    data.forEach(c => { if (grouped[c.section]) grouped[c.section].push(c); });
+    Object.keys(grouped).forEach(s => renderComments(s, grouped[s]));
+  } catch(e) {
+    ['priorities','inbox','projects'].forEach(s => {
+      document.getElementById('thread-' + s).innerHTML = '';
+    });
+  }
 }
 
-async function sendComment(section,label,author){
-  const ta=document.getElementById('ta-'+author+'-'+section);
-  const btn=ta.closest('.comment-row').querySelector('.cbtn');
-  const text=ta.value.trim();
-  if(!text){ta.focus();return;}
-  btn.disabled=true;btn.textContent='...';
-  const now=new Date();
-  const timeStr=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'America/Denver'})+' MT';
-  const senderName=author==='cory'?'Cory':'Fiona';
-  const emoji=author==='cory'?':speech_balloon:':':pencil:';
-  const blocks=[
-    {type:'section',text:{type:'mrkdwn',text:emoji+' *'+senderName+' commented on the Executive Dashboard*'}},
-    {type:'section',fields:[
-      {type:'mrkdwn',text:'*Section:*\n'+label},
-      {type:'mrkdwn',text:'*Time:*\n'+DATE+' · '+timeStr}
+async function sendComment(section, label, author) {
+  const ta = document.getElementById('ta-' + author + '-' + section);
+  const btn = ta.closest('.comment-row').querySelector('.cbtn');
+  const text = ta.value.trim();
+  if (!text) { ta.focus(); return; }
+  btn.disabled = true; btn.textContent = '...';
+  const name = author === 'cory' ? 'Cory' : 'Fiona';
+  const emoji = author === 'cory' ? ':speech_balloon:' : ':pencil:';
+  const slack_blocks = [
+    { type: 'section', text: { type: 'mrkdwn', text: emoji + ' *' + name + ' commented on the Executive Dashboard*' } },
+    { type: 'section', fields: [
+      { type: 'mrkdwn', text: '*Section:*\n' + label },
+      { type: 'mrkdwn', text: '*Date:*\n' + DATE_LABEL }
     ]},
-    {type:'section',text:{type:'mrkdwn',text:'*Comment:*\n'+text}},
-    {type:'context',elements:[{type:'mrkdwn',text:'_View dashboard → '+DASHBOARD_URL+'_'}]}
+    { type: 'section', text: { type: 'mrkdwn', text: '*Comment:*\n' + text } },
+    { type: 'context', elements: [{ type: 'mrkdwn', text: '_View dashboard → ' + DASHBOARD_URL + '_' }] }
   ];
-  try{
-    await fetch(RELAY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({blocks})});
-    const d=loadComments();
-    d[section].push({text,time:timeStr,author});
-    saveComments(d);
-    renderComments(section,d[section]);
-    ta.value='';btn.textContent='Send';btn.disabled=false;
-  }catch(e){btn.textContent='Send';btn.disabled=false;alert('Could not send. Try again.');}
+  try {
+    await fetch(RELAY + '/comment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section, author, message: text, dashboard_date: DASHBOARD_DATE, slack_blocks })
+    });
+    ta.value = '';
+    btn.textContent = 'Send';
+    btn.disabled = false;
+    await loadComments();
+  } catch(e) {
+    btn.textContent = 'Send';
+    btn.disabled = false;
+    alert('Could not send. Please try again.');
+  }
 }
 
-initComments();
+loadComments();
 </script>
 </body>
 </html>
