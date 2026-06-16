@@ -22,7 +22,7 @@
   .n1 { background: #fee2e2; color: #b91c1c; }
   .n2 { background: #fef3c7; color: #92400e; }
   .priority-text { font-size: 14px; color: #1a1a1a; flex: 1; line-height: 1.45; }
-  .priority-project { font-size: 12px; color: #aaa; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+  .priority-project { font-size: 12px; color: #aaa; margin-top: 3px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
   @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
   .inbox-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
@@ -49,6 +49,17 @@
   .pill-gray { background: #f3f4f6; color: #6b7280; }
   .proj-update { font-size: 13px; color: #555; line-height: 1.55; }
   .proj-next { font-size: 12px; color: #aaa; margin-top: 4px; font-style: italic; }
+  .comment-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
+  .comment-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #ccc; margin-bottom: 8px; }
+  .comment-box textarea { width: 100%; padding: 10px 12px; border: 1px solid #e8e8e8; border-radius: 10px; font-size: 13px; font-family: inherit; color: #1a1a1a; resize: vertical; min-height: 68px; line-height: 1.5; transition: border-color .15s; }
+  .comment-box textarea:focus { outline: none; border-color: #4A154B; }
+  .comment-box textarea::placeholder { color: #ccc; }
+  .comment-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+  .comment-hint { font-size: 11px; color: #ccc; }
+  .comment-btn { padding: 7px 16px; background: #4A154B; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .15s; }
+  .comment-btn:hover { opacity: .85; }
+  .comment-btn:disabled { opacity: .45; cursor: not-allowed; }
+  .comment-sent { font-size: 13px; color: #065f46; background: #d1fae5; border-radius: 8px; padding: 8px 12px; margin-top: 8px; display: none; }
   .footer { text-align: center; font-size: 12px; color: #ccc; padding: 1rem 0 .5rem; }
 </style>
 </head>
@@ -98,6 +109,15 @@
         <div class="priority-project">📁 Foley Refi</div>
       </div>
     </div>
+    <div class="comment-box">
+      <div class="comment-label">Cory's comment</div>
+      <textarea id="ta-priorities" placeholder="Add a comment on today's priorities..."></textarea>
+      <div class="comment-footer">
+        <span class="comment-hint">Sends a notification to Fiona on Slack</span>
+        <button class="comment-btn" onclick="sendComment('priorities', 'Top Priorities')">Send</button>
+      </div>
+      <div class="comment-sent" id="sent-priorities">✓ Comment sent to Fiona on Slack!</div>
+    </div>
   </div>
 
   <div class="two-col">
@@ -130,6 +150,15 @@
           <div class="inbox-ctx">Nothing today</div>
         </div>
         <span class="inbox-badge badge-gray">0</span>
+      </div>
+      <div class="comment-box">
+        <div class="comment-label">Cory's comment</div>
+        <textarea id="ta-inbox" placeholder="Add a comment on inbox items..."></textarea>
+        <div class="comment-footer">
+          <span class="comment-hint">Sends a notification to Fiona on Slack</span>
+          <button class="comment-btn" onclick="sendComment('inbox', 'Inbox')">Send</button>
+        </div>
+        <div class="comment-sent" id="sent-inbox">✓ Comment sent to Fiona on Slack!</div>
       </div>
     </div>
 
@@ -184,9 +213,59 @@
       <div class="proj-update">Moved to backlog. Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div>
       <div class="proj-next">→ Needs Cory's direction on next steps</div>
     </div>
+    <div class="comment-box">
+      <div class="comment-label">Cory's comment</div>
+      <textarea id="ta-projects" placeholder="Add a comment on project status..."></textarea>
+      <div class="comment-footer">
+        <span class="comment-hint">Sends a notification to Fiona on Slack</span>
+        <button class="comment-btn" onclick="sendComment('projects', 'Project Status')">Send</button>
+      </div>
+      <div class="comment-sent" id="sent-projects">✓ Comment sent to Fiona on Slack!</div>
+    </div>
   </div>
 
   <div class="footer">Fiona-Cory Daily Executive Dashboard · Generated Jun 16, 2026</div>
 </div>
+
+<script>
+const RELAY = 'https://fc-dashboard-relay.fiona-251.workers.dev/';
+const DATE = 'Tuesday, June 16, 2026';
+const DASHBOARD_URL = 'https://fionaeflynnecafe.github.io/fiona-cory-dashboard';
+
+async function sendComment(section, label) {
+  const ta = document.getElementById('ta-' + section);
+  const btn = ta.closest('.comment-box').querySelector('.comment-btn');
+  const sent = document.getElementById('sent-' + section);
+  const text = ta.value.trim();
+  if (!text) { ta.focus(); return; }
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  const blocks = [
+    { type: 'section', text: { type: 'mrkdwn', text: ':speech_balloon: *Cory left a comment on the Executive Dashboard*' } },
+    { type: 'section', fields: [
+      { type: 'mrkdwn', text: '*Section:*\n' + label },
+      { type: 'mrkdwn', text: '*Date:*\n' + DATE }
+    ]},
+    { type: 'section', text: { type: 'mrkdwn', text: '*Comment:*\n' + text } },
+    { type: 'context', elements: [{ type: 'mrkdwn', text: '_View dashboard → ' + DASHBOARD_URL + '_' }] }
+  ];
+  try {
+    await fetch(RELAY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ blocks })
+    });
+    ta.value = '';
+    btn.textContent = 'Send';
+    btn.disabled = false;
+    sent.style.display = 'block';
+    setTimeout(() => sent.style.display = 'none', 4000);
+  } catch(e) {
+    btn.textContent = 'Send';
+    btn.disabled = false;
+    alert('Could not send. Please try again.');
+  }
+}
+</script>
 </body>
 </html>
