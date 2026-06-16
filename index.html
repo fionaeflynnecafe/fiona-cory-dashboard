@@ -16,341 +16,378 @@
     --charcoal: #3D3C3F;
     --gold:     #B8942A;
     --white:    #ffffff;
-    --border:   #E4E0D8;
+    --bg:       #ECEAE4;
+    --border:   #DDD9D0;
   }
 
-  body {
+  html, body {
+    min-height: 100%;
     font-family: Arial, sans-serif;
-    background: var(--cream);
+    background: var(--bg);
     color: var(--charcoal);
-    min-height: 100vh;
-    padding: 1.25rem;
   }
 
-  /* TOP BAR */
-  .topbar {
+  /* ─── HEADER ─── */
+  .header {
     background: var(--forest);
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.25rem;
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: .75rem;
-    border-bottom: 3px solid var(--green);
+    gap: 1rem;
+    border-bottom: 4px solid var(--green);
   }
-  .topbar-left { display: flex; align-items: center; gap: 14px; }
-  .fig-mark {
-    background: var(--green);
-    color: var(--cream);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .12em;
-    padding: 6px 10px;
-    border-radius: 6px;
-  }
-  .topbar-title { color: var(--cream); font-size: 16px; font-weight: 700; }
-  .topbar-sub { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-top: 3px; }
-  .topbar-date .day { color: var(--cream); font-size: 13px; font-weight: 700; text-align: right; }
-  .topbar-date .tz { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: right; margin-top: 3px; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
 
-  /* GRID */
-  .grid-2 {
+  /* FIG Logo SVG mark */
+  .fig-logo {
+    width: 44px; height: 44px;
+    background: var(--green);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .fig-logo svg { width: 28px; height: 28px; }
+
+  .header-text-title { font-size: 17px; font-weight: 700; color: var(--cream); letter-spacing: .01em; }
+  .header-text-sub { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-top: 3px; }
+  .header-right { text-align: right; }
+  .header-date { font-size: 13px; font-weight: 700; color: var(--cream); }
+  .header-tz { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+
+  /* ─── PAGE ─── */
+  .page {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ─── TILE GRID ─── */
+  .tile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
+    gap: 1.5rem;
   }
-  @media (max-width: 780px) { .grid-2 { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .tile-grid { grid-template-columns: 1fr; } }
 
-  /* CARD */
-  .card {
+  /* ─── TILE ─── */
+  .tile {
     background: var(--white);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--green);
+    border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(28,31,24,.07), 0 1px 3px rgba(28,31,24,.04);
     display: flex;
     flex-direction: column;
   }
 
-  .card-head {
-    padding: 1rem 1.25rem .6rem;
+  /* Tile color bar at top */
+  .tile-bar {
+    height: 5px;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .tile-bar-gold { background: var(--gold); }
+
+  /* Tile header */
+  .tile-head {
+    padding: 1.25rem 1.5rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
     border-bottom: 1px solid var(--sand);
   }
-  .eyebrow {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 3px;
-  }
-  .card-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--forest);
-  }
-
-  .card-body { padding: .75rem 1.25rem; flex: 1; }
-
-  /* DIVIDER ROWS */
-  .drow { padding: 9px 0; border-bottom: 1px solid var(--sand); }
-  .drow:last-child { border-bottom: none; padding-bottom: 0; }
-
-  /* PRIORITIES */
-  .prow { display: flex; align-items: flex-start; gap: 10px; }
-  .pnum {
-    width: 22px; height: 22px; border-radius: 50%;
+  .tile-head-left { display: flex; align-items: center; gap: 12px; }
+  .tile-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .tile-icon-green { background: #E8F5EE; }
+  .tile-icon-gold  { background: #FBF3E3; }
+  .tile-icon-blue  { background: #E8F0FB; }
+  .tile-icon-teal  { background: #E3F4EC; }
+  .tile-icon svg   { width: 22px; height: 22px; }
+  .tile-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 3px; }
+  .tile-eyebrow-gold { color: var(--gold); }
+  .tile-title { font-size: 15px; font-weight: 700; color: var(--forest); }
+  .tile-count {
+    font-size: 11px; font-weight: 700; letter-spacing: .05em;
+    padding: 3px 10px; border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .tc-green { background: #E8F5EE; color: var(--green); }
+  .tc-gold  { background: #FBF3E3; color: var(--gold); }
+
+  /* Tile body */
+  .tile-body { padding: 1rem 1.5rem; flex: 1; }
+
+  /* Divider rows */
+  .drow { padding: 10px 0; border-bottom: 1px solid var(--sand); }
+  .drow:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+  /* ─── PRIORITIES ─── */
+  .prow { display: flex; align-items: flex-start; gap: 12px; }
+  .pnum {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
   }
   .p1 { background: var(--gold); color: var(--white); }
   .p2 { background: var(--sand); color: var(--charcoal); }
-  .pname { font-size: 13.5px; font-weight: 700; color: var(--forest); line-height: 1.4; }
-  .ptag { font-size: 10.5px; color: var(--green); font-weight: 700; letter-spacing: .03em; margin-top: 3px; }
+  .pname { font-size: 14px; font-weight: 700; color: var(--forest); line-height: 1.4; }
+  .ptag { font-size: 11px; color: var(--green); font-weight: 700; margin-top: 3px; }
 
-  /* INBOX */
-  .irow { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .iname { font-size: 13.5px; font-weight: 700; color: var(--forest); }
-  .idesc { font-size: 12px; color: var(--charcoal); margin-top: 3px; line-height: 1.5; font-style: italic; }
-  .ibadge {
-    font-size: 10px; font-weight: 700;
-    min-width: 24px; height: 24px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 1px;
-  }
-  .ib-gold { background: var(--gold); color: var(--white); }
-  .ib-sand { background: var(--sand); color: var(--charcoal); }
-  .ib-green { background: var(--green); color: var(--white); }
-
-  /* CALENDAR */
-  .crow { display: flex; align-items: flex-start; gap: 12px; }
-  .ctime {
-    font-size: 10.5px; font-weight: 700; color: var(--gold);
-    letter-spacing: .04em; text-transform: uppercase;
-    min-width: 82px; flex-shrink: 0; padding-top: 2px; line-height: 1.5;
-  }
-  .cevent { font-size: 13.5px; font-weight: 700; color: var(--forest); }
-  .csub { font-size: 11.5px; color: var(--charcoal); margin-top: 2px; font-style: italic; }
-
-  /* PROJECTS */
-  .pj { }
-  .pj-head { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; flex-wrap: wrap; }
-  .pj-name { font-size: 13.5px; font-weight: 700; color: var(--forest); }
-  .pj-pill {
-    font-size: 9.5px; font-weight: 700; letter-spacing: .05em;
-    text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
-  }
-  .pill-gold { background: var(--gold); color: var(--white); }
+  /* ─── PROJECTS ─── */
+  .pj-name { font-size: 14px; font-weight: 700; color: var(--forest); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .pj-pill { font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+  .pill-gold  { background: var(--gold); color: var(--white); }
   .pill-green { background: var(--green); color: var(--white); }
-  .pill-sand { background: var(--sand); color: var(--charcoal); }
+  .pill-sand  { background: var(--sand); color: var(--charcoal); }
   .pj-body { font-size: 12.5px; color: var(--charcoal); line-height: 1.55; }
   .pj-next { font-size: 11.5px; color: var(--green); font-weight: 700; margin-top: 5px; }
 
-  /* COMMENTS */
+  /* ─── INBOX ─── */
+  .irow { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+  .iname { font-size: 14px; font-weight: 700; color: var(--forest); }
+  .idesc { font-size: 12px; color: var(--charcoal); margin-top: 3px; line-height: 1.5; font-style: italic; }
+  .ibadge { font-size: 11px; font-weight: 700; min-width: 26px; height: 26px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .ib-gold  { background: var(--gold); color: var(--white); }
+  .ib-sand  { background: var(--sand); color: var(--charcoal); }
+  .ib-green { background: var(--green); color: var(--white); }
+
+  /* ─── CALENDAR ─── */
+  .crow { display: flex; align-items: flex-start; gap: 14px; }
+  .c-dot-col { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding-top: 4px; gap: 0; }
+  .c-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .c-line { width: 2px; flex: 1; background: var(--sand); margin-top: 3px; min-height: 18px; }
+  .drow:last-of-type .c-line { display: none; }
+  .ctime { font-size: 10.5px; font-weight: 700; color: var(--gold); letter-spacing: .04em; text-transform: uppercase; min-width: 90px; flex-shrink: 0; padding-top: 0; line-height: 1.5; }
+  .cevent { font-size: 14px; font-weight: 700; color: var(--forest); }
+  .csub { font-size: 12px; color: var(--charcoal); margin-top: 2px; font-style: italic; }
+
+  /* ─── COMMENT ZONE ─── */
   .comment-zone {
     border-top: 2px solid var(--sand);
     background: var(--cream);
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.5rem;
+    border-radius: 0 0 16px 16px;
   }
-  .thread { display: flex; flex-direction: column; gap: 7px; margin-bottom: 1rem; }
-  .bubble {
-    padding: 9px 12px;
-    border-radius: 6px;
-    font-size: 12.5px;
-    line-height: 1.5;
-  }
-  .bubble-cory { background: var(--white); border-left: 3px solid var(--green); }
+  .thread { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .bubble { padding: 10px 13px; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+  .bubble-cory  { background: var(--white); border-left: 3px solid var(--green); }
   .bubble-fiona { background: var(--white); border-left: 3px solid var(--bright); }
-  .b-meta {
-    display: flex; justify-content: space-between;
-    font-size: 9px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; margin-bottom: 4px;
-  }
-  .bubble-cory .b-who { color: var(--green); }
+  .b-meta { display: flex; justify-content: space-between; font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 4px; }
+  .bubble-cory  .b-who { color: var(--green); }
   .bubble-fiona .b-who { color: var(--bright); }
   .b-when { color: var(--gold); }
-  .b-msg { color: var(--charcoal); }
+  .b-msg  { color: var(--charcoal); }
   .loading-c { font-size: 11px; color: var(--gold); font-style: italic; opacity: .55; }
 
-  /* STACKED INPUTS */
   .inputs { display: flex; flex-direction: column; gap: 10px; }
   .inp-block { display: flex; flex-direction: column; gap: 4px; }
-  .inp-label {
-    font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  }
-  .inp-label-cory { color: var(--green); }
+  .inp-label { font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+  .inp-label-cory  { color: var(--green); }
   .inp-label-fiona { color: var(--bright); }
   .inp-row { display: flex; gap: 8px; align-items: flex-end; }
   .inp-row textarea {
-    flex: 1; height: 54px;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 13px;
-    font-family: Arial, sans-serif;
-    color: var(--charcoal);
-    background: var(--white);
+    flex: 1; height: 54px; padding: 8px 11px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; font-family: Arial, sans-serif;
+    color: var(--charcoal); background: var(--white);
     resize: none; line-height: 1.45;
     transition: border-color .15s;
   }
   .inp-row textarea:focus { outline: none; border-color: var(--green); }
   .inp-row .fiona-ta:focus { border-color: var(--bright); }
-  .inp-row textarea::placeholder { color: var(--gold); opacity: .45; font-style: italic; }
+  .inp-row textarea::placeholder { color: var(--gold); opacity: .4; font-style: italic; }
   .sbtn {
-    padding: 8px 14px;
-    font-size: 11px; font-weight: 700;
-    font-family: Arial, sans-serif;
-    letter-spacing: .06em; text-transform: uppercase;
-    border: none; border-radius: 6px;
-    cursor: pointer; transition: opacity .15s;
-    white-space: nowrap; flex-shrink: 0;
-    align-self: flex-end;
+    padding: 9px 16px; font-size: 11px; font-weight: 700;
+    font-family: Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase;
+    border: none; border-radius: 8px; cursor: pointer;
+    transition: opacity .15s; white-space: nowrap; flex-shrink: 0; align-self: flex-end;
   }
-  .sbtn-cory { background: var(--green); color: var(--white); }
+  .sbtn-cory  { background: var(--green); color: var(--white); }
   .sbtn-fiona { background: var(--bright); color: var(--white); }
   .sbtn:hover { opacity: .82; }
   .sbtn:disabled { opacity: .35; cursor: not-allowed; }
 
-  /* FOOTER */
+  /* ─── FOOTER ─── */
   .footer {
     background: var(--forest);
-    border-radius: 10px;
-    padding: .65rem 1.5rem;
+    padding: .65rem 2rem;
     display: flex; align-items: center; justify-content: space-between;
-    margin-top: .25rem;
+    margin-top: 2rem;
   }
-  .footer-text {
-    font-size: 9px; font-weight: 700; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--green); opacity: .7;
-  }
+  .footer-text { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); opacity: .65; }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<div class="topbar">
-  <div class="topbar-left">
-    <div class="fig-mark">FIG</div>
+<div class="header">
+  <div class="header-left">
+    <!-- FIG Logo Mark -->
+    <div class="fig-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="5" fill="#198B40"/>
+        <path d="M6 8h10v2.5H8.5v3H15V16H8.5v6H6V8z" fill="white"/>
+        <path d="M17.5 8h2.5v14h-2.5V8z" fill="white"/>
+        <path d="M21.5 8H24v5.5h-2.5V8z" fill="white"/>
+        <path d="M21.5 14.5H24V17h-2.5v-2.5z" fill="white"/>
+      </svg>
+    </div>
     <div>
-      <div class="topbar-title">Daily Executive Brief</div>
-      <div class="topbar-sub">Freedom Investing Group · Prepared by Fiona</div>
+      <div class="header-text-title">Daily Executive Brief</div>
+      <div class="header-text-sub">Freedom Investing Group · Prepared by Fiona</div>
     </div>
   </div>
-  <div class="topbar-date">
-    <div class="day">Wednesday, June 17, 2026</div>
-    <div class="tz">Mountain Time</div>
+  <div class="header-right">
+    <div class="header-date">Wednesday, June 17, 2026</div>
+    <div class="header-tz">Mountain Time</div>
   </div>
 </div>
 
-<!-- ROW 1: Priorities + Projects -->
-<div class="grid-2">
+<!-- PAGE -->
+<div class="page">
+  <div class="tile-grid">
 
-  <!-- PRIORITIES -->
-  <div class="card">
-    <div class="card-head">
-      <div class="eyebrow">Today's focus</div>
-      <div class="card-title">Top Priorities</div>
-    </div>
-    <div class="card-body">
-      <div class="drow"><div class="prow"><div class="pnum p1">1</div><div><div class="pname">CVE Insurance Renewal — due Jun 19</div><div class="ptag">Compliance · Contact Stephanie Haynes</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">2</div><div><div class="pname">Week 1: Insurance</div><div class="ptag">Duckers &amp; Valley View Due Diligence</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">3</div><div><div class="pname">Renew HE Insurance — expires Jul 31</div><div class="ptag">Hillsboro Property Management</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">4</div><div><div class="pname">Foley Survey — ALTA required by lender</div><div class="ptag">Fiona-Cory Agenda</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">5</div><div><div class="pname">Insurance at Foley — get quotes</div><div class="ptag">Foley Refi</div></div></div></div>
-    </div>
-    <div class="comment-zone">
-      <div class="thread" id="thread-priorities"><div class="loading-c">Loading comments…</div></div>
-      <div class="inputs">
-        <div class="inp-block">
-          <div class="inp-label inp-label-cory">Cory's note</div>
-          <div class="inp-row"><textarea id="ta-cory-priorities" placeholder="Leave a note…"></textarea><button class="sbtn sbtn-cory" onclick="sendComment('priorities','Top Priorities','cory')">Send</button></div>
+    <!-- TILE 1: TOP PRIORITIES -->
+    <div class="tile">
+      <div class="tile-bar"></div>
+      <div class="tile-head">
+        <div class="tile-head-left">
+          <div class="tile-icon tile-icon-gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#B8942A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tile-eyebrow tile-eyebrow-gold">Today's Focus</div>
+            <div class="tile-title">Top Priorities</div>
+          </div>
         </div>
-        <div class="inp-block">
-          <div class="inp-label inp-label-fiona">Fiona's reply</div>
-          <div class="inp-row"><textarea id="ta-fiona-priorities" class="fiona-ta" placeholder="Reply to Cory…"></textarea><button class="sbtn sbtn-fiona" onclick="sendComment('priorities','Top Priorities','fiona')">Send</button></div>
+        <span class="tile-count tc-gold">5 items</span>
+      </div>
+      <div class="tile-body">
+        <div class="drow"><div class="prow"><div class="pnum p1">1</div><div><div class="pname">CVE Insurance Renewal — due Jun 19</div><div class="ptag">Compliance · Contact Stephanie Haynes</div></div></div></div>
+        <div class="drow"><div class="prow"><div class="pnum p2">2</div><div><div class="pname">Week 1: Insurance</div><div class="ptag">Duckers &amp; Valley View Due Diligence</div></div></div></div>
+        <div class="drow"><div class="prow"><div class="pnum p2">3</div><div><div class="pname">Renew HE Insurance — expires Jul 31</div><div class="ptag">Hillsboro Property Management</div></div></div></div>
+        <div class="drow"><div class="prow"><div class="pnum p2">4</div><div><div class="pname">Foley Survey — ALTA required by lender</div><div class="ptag">Fiona-Cory Agenda</div></div></div></div>
+        <div class="drow"><div class="prow"><div class="pnum p2">5</div><div><div class="pname">Insurance at Foley — get quotes</div><div class="ptag">Foley Refi</div></div></div></div>
+      </div>
+      <div class="comment-zone">
+        <div class="thread" id="thread-priorities"><div class="loading-c">Loading comments…</div></div>
+        <div class="inputs">
+          <div class="inp-block"><div class="inp-label inp-label-cory">Cory's note</div><div class="inp-row"><textarea id="ta-cory-priorities" placeholder="Leave a note…"></textarea><button class="sbtn sbtn-cory" onclick="sendComment('priorities','Top Priorities','cory')">Send</button></div></div>
+          <div class="inp-block"><div class="inp-label inp-label-fiona">Fiona's reply</div><div class="inp-row"><textarea id="ta-fiona-priorities" class="fiona-ta" placeholder="Reply to Cory…"></textarea><button class="sbtn sbtn-fiona" onclick="sendComment('priorities','Top Priorities','fiona')">Send</button></div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- PROJECTS -->
-  <div class="card">
-    <div class="card-head">
-      <div class="eyebrow">Active deals &amp; tasks</div>
-      <div class="card-title">Project Status</div>
-    </div>
-    <div class="card-body">
-      <div class="drow"><div class="pj"><div class="pj-head"><div class="pj-name">CVE Insurance Renewal</div><span class="pj-pill pill-gold">Due Jun 19</span></div><div class="pj-body">Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pj-next">→ Initiate renewal with Stephanie</div></div></div>
-      <div class="drow"><div class="pj"><div class="pj-head"><div class="pj-name">Foley ALTA Survey</div><span class="pj-pill pill-green">In Progress</span></div><div class="pj-body">CREtelligent signed ($9.5k, Jun 8). Title commitment sent Jun 15. Lender: First Tech FCU.</div><div class="pj-next">→ Awaiting survey delivery</div></div></div>
-      <div class="drow"><div class="pj"><div class="pj-head"><div class="pj-name">HE Insurance Renewal</div><span class="pj-pill pill-sand">In Progress</span></div><div class="pj-body">Policy ZHSM077443 expires Jul 31. Worker's comp renewed Jun 8.</div><div class="pj-next">→ Waiting on Stephanie's proposal</div></div></div>
-      <div class="drow"><div class="pj"><div class="pj-head"><div class="pj-name">Rate Reset — CLK &amp; Acres Rd</div><span class="pj-pill pill-sand">Not Started</span></div><div class="pj-body">Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div><div class="pj-next">→ Needs Cory's direction</div></div></div>
-    </div>
-    <div class="comment-zone">
-      <div class="thread" id="thread-projects"><div class="loading-c">Loading comments…</div></div>
-      <div class="inputs">
-        <div class="inp-block">
-          <div class="inp-label inp-label-cory">Cory's note</div>
-          <div class="inp-row"><textarea id="ta-cory-projects" placeholder="Leave a note…"></textarea><button class="sbtn sbtn-cory" onclick="sendComment('projects','Project Status','cory')">Send</button></div>
+    <!-- TILE 2: PROJECT STATUS -->
+    <div class="tile">
+      <div class="tile-bar"></div>
+      <div class="tile-head">
+        <div class="tile-head-left">
+          <div class="tile-icon tile-icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#198B40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+              <path d="M7 8h4M7 12h8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tile-eyebrow">Active Deals &amp; Tasks</div>
+            <div class="tile-title">Project Status</div>
+          </div>
         </div>
-        <div class="inp-block">
-          <div class="inp-label inp-label-fiona">Fiona's reply</div>
-          <div class="inp-row"><textarea id="ta-fiona-projects" class="fiona-ta" placeholder="Reply to Cory…"></textarea><button class="sbtn sbtn-fiona" onclick="sendComment('projects','Project Status','fiona')">Send</button></div>
+        <span class="tile-count tc-green">4 active</span>
+      </div>
+      <div class="tile-body">
+        <div class="drow"><div class="pj-name">CVE Insurance Renewal <span class="pj-pill pill-gold">Due Jun 19</span></div><div class="pj-body">Two policies on file: commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pj-next">→ Initiate renewal with Stephanie</div></div>
+        <div class="drow"><div class="pj-name">Foley ALTA Survey <span class="pj-pill pill-green">In Progress</span></div><div class="pj-body">CREtelligent signed ($9.5k, Jun 8). Title commitment sent Jun 15. Lender: First Tech FCU.</div><div class="pj-next">→ Awaiting survey delivery</div></div>
+        <div class="drow"><div class="pj-name">HE Insurance Renewal <span class="pj-pill pill-sand">In Progress</span></div><div class="pj-body">Policy ZHSM077443 expires Jul 31. Worker's comp renewed Jun 8.</div><div class="pj-next">→ Waiting on Stephanie's proposal</div></div>
+        <div class="drow"><div class="pj-name">Rate Reset — CLK &amp; Acres Rd <span class="pj-pill pill-sand">Not Started</span></div><div class="pj-body">Docs uploaded to Five Star Bank Apr 17. Bank confirmed receipt.</div><div class="pj-next">→ Needs Cory's direction</div></div>
+      </div>
+      <div class="comment-zone">
+        <div class="thread" id="thread-projects"><div class="loading-c">Loading comments…</div></div>
+        <div class="inputs">
+          <div class="inp-block"><div class="inp-label inp-label-cory">Cory's note</div><div class="inp-row"><textarea id="ta-cory-projects" placeholder="Leave a note…"></textarea><button class="sbtn sbtn-cory" onclick="sendComment('projects','Project Status','cory')">Send</button></div></div>
+          <div class="inp-block"><div class="inp-label inp-label-fiona">Fiona's reply</div><div class="inp-row"><textarea id="ta-fiona-projects" class="fiona-ta" placeholder="Reply to Cory…"></textarea><button class="sbtn sbtn-fiona" onclick="sendComment('projects','Project Status','fiona')">Send</button></div></div>
         </div>
       </div>
     </div>
-  </div>
 
-</div>
-
-<!-- ROW 2: Inbox + Meetings -->
-<div class="grid-2">
-
-  <!-- INBOX -->
-  <div class="card">
-    <div class="card-head">
-      <div class="eyebrow">Email triage</div>
-      <div class="card-title">Cory's Inbox</div>
-    </div>
-    <div class="card-body">
-      <div class="drow"><div class="irow"><div><div class="iname">! Cory please handle</div><div class="idesc">Morgan (Ocean Ridge Capital) — share insurance quotes &amp; limits, last DD item before investors lock in for Duckers &amp; Valley View</div></div><span class="ibadge ib-gold">1</span></div></div>
-      <div class="drow"><div class="irow"><div><div class="iname">1. FYI</div><div class="idesc">Ryan &amp; Karla coordinating WaterScope access + waterline map — Cory cc'd only</div></div><span class="ibadge ib-sand">1</span></div></div>
-      <div class="drow"><div class="irow"><div><div class="iname">2. Fiona to respond</div><div class="idesc">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls &amp; 2025 tax extensions; Ian Nobles also has financial info needed</div></div><span class="ibadge ib-green">1</span></div></div>
-      <div class="drow"><div class="irow"><div><div class="iname">3. Review</div><div class="idesc">Nothing today</div></div><span class="ibadge ib-sand">0</span></div></div>
-    </div>
-    <div class="comment-zone">
-      <div class="thread" id="thread-inbox"><div class="loading-c">Loading comments…</div></div>
-      <div class="inputs">
-        <div class="inp-block">
-          <div class="inp-label inp-label-cory">Cory's note</div>
-          <div class="inp-row"><textarea id="ta-cory-inbox" placeholder="Leave a note…"></textarea><button class="sbtn sbtn-cory" onclick="sendComment('inbox','Inbox','cory')">Send</button></div>
+    <!-- TILE 3: INBOX -->
+    <div class="tile">
+      <div class="tile-bar tile-bar-gold"></div>
+      <div class="tile-head">
+        <div class="tile-head-left">
+          <div class="tile-icon tile-icon-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B6FD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tile-eyebrow">Email Triage</div>
+            <div class="tile-title">Cory's Inbox</div>
+          </div>
         </div>
-        <div class="inp-block">
-          <div class="inp-label inp-label-fiona">Fiona's reply</div>
-          <div class="inp-row"><textarea id="ta-fiona-inbox" class="fiona-ta" placeholder="Reply to Cory…"></textarea><button class="sbtn sbtn-fiona" onclick="sendComment('inbox','Inbox','fiona')">Send</button></div>
+        <span class="tile-count tc-gold">3 items</span>
+      </div>
+      <div class="tile-body">
+        <div class="drow"><div class="irow"><div><div class="iname">! Cory please handle</div><div class="idesc">Morgan (Ocean Ridge Capital) — share insurance quotes &amp; limits, last DD item before investors lock in for Duckers &amp; Valley View</div></div><span class="ibadge ib-gold">1</span></div></div>
+        <div class="drow"><div class="irow"><div><div class="iname">1. FYI</div><div class="idesc">Ryan &amp; Karla coordinating WaterScope access + waterline map — Cory cc'd only</div></div><span class="ibadge ib-sand">1</span></div></div>
+        <div class="drow"><div class="irow"><div><div class="iname">2. Fiona to respond</div><div class="idesc">Rate Reset — Max (Five Star Bank) needs P&amp;L, rent rolls &amp; 2025 tax extensions; Ian Nobles also has financial info needed</div></div><span class="ibadge ib-green">1</span></div></div>
+        <div class="drow"><div class="irow"><div><div class="iname">3. Review</div><div class="idesc">Nothing today</div></div><span class="ibadge ib-sand">0</span></div></div>
+      </div>
+      <div class="comment-zone">
+        <div class="thread" id="thread-inbox"><div class="loading-c">Loading comments…</div></div>
+        <div class="inputs">
+          <div class="inp-block"><div class="inp-label inp-label-cory">Cory's note</div><div class="inp-row"><textarea id="ta-cory-inbox" placeholder="Leave a note…"></textarea><button class="sbtn sbtn-cory" onclick="sendComment('inbox','Inbox','cory')">Send</button></div></div>
+          <div class="inp-block"><div class="inp-label inp-label-fiona">Fiona's reply</div><div class="inp-row"><textarea id="ta-fiona-inbox" class="fiona-ta" placeholder="Reply to Cory…"></textarea><button class="sbtn sbtn-fiona" onclick="sendComment('inbox','Inbox','fiona')">Send</button></div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- MEETINGS -->
-  <div class="card">
-    <div class="card-head">
-      <div class="eyebrow">This week</div>
-      <div class="card-title">Meetings &amp; Calendar</div>
+    <!-- TILE 4: CALENDAR -->
+    <div class="tile">
+      <div class="tile-bar tile-bar-gold"></div>
+      <div class="tile-head">
+        <div class="tile-head-left">
+          <div class="tile-icon tile-icon-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#198B40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+              <circle cx="8" cy="15" r="1" fill="#198B40"/>
+              <circle cx="12" cy="15" r="1" fill="#198B40"/>
+              <circle cx="16" cy="15" r="1" fill="#198B40"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tile-eyebrow">This Week</div>
+            <div class="tile-title">Meetings &amp; Calendar</div>
+          </div>
+        </div>
+        <span class="tile-count tc-green">6 events</span>
+      </div>
+      <div class="tile-body">
+        <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today · 9:30 AM</div><div class="cevent">Cory &lt;&gt; Yasha — Blueprint Industrial Capital</div><div class="csub">First call — potential capital partner</div></div></div></div>
+        <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today · 11:00 AM</div><div class="cevent">Raise Masters Q&amp;A</div></div></div></div>
+        <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today · 2:30 PM</div><div class="cevent">Weekly Team Check In</div><div class="csub">L10 — full team</div></div></div></div>
+        <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Thu · 1:15 PM</div><div class="cevent">Fiona–Cory Sync</div></div></div></div>
+        <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Thu · 1:45 PM</div><div class="cevent">Freedom Capital Call — TN/CCH</div><div class="csub">Cory + Thomas</div></div></div></div>
+        <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div></div><div style="flex:1"><div class="ctime">Fri · 2:30 PM</div><div class="cevent">FIG Improvement Meeting</div><div class="csub">Cory, Karla, Thomas</div></div></div></div>
+      </div>
     </div>
-    <div class="card-body">
-      <div class="drow"><div class="crow"><div class="ctime">Today · 9:30 AM</div><div><div class="cevent">Cory &lt;&gt; Yasha — Blueprint Industrial Capital</div><div class="csub">First call — potential capital partner</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="ctime">Today · 11:00 AM</div><div><div class="cevent">Raise Masters Q&amp;A</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="ctime">Today · 2:30 PM</div><div><div class="cevent">Weekly Team Check In</div><div class="csub">L10 — full team</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="ctime">Thu · 1:15 PM</div><div><div class="cevent">Fiona–Cory Sync</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="ctime">Thu · 1:45 PM</div><div><div class="cevent">Freedom Capital Call — TN/CCH</div><div class="csub">Cory + Thomas</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="ctime">Fri · 2:30 PM</div><div><div class="cevent">FIG Improvement Meeting</div><div class="csub">Cory, Karla, Thomas</div></div></div></div>
-    </div>
-  </div>
 
+  </div>
 </div>
 
 <!-- FOOTER -->
