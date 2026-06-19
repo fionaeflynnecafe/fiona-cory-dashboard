@@ -17,6 +17,7 @@
     --white:    #ffffff;
     --bg:       #ECEAE4;
     --border:   #DDD9D0;
+    --red:      #C0392B;
   }
   html, body { min-height: 100%; font-family: Arial, sans-serif; background: var(--bg); color: var(--charcoal); }
   .header { background: var(--forest); padding: 0 1.5rem; display: flex; align-items: stretch; justify-content: space-between; border-bottom: 4px solid var(--green); min-height: 80px; overflow: hidden; flex-wrap: wrap; gap: .5rem; }
@@ -29,6 +30,10 @@
   .header-date-zone { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; padding: .75rem 0; gap: 3px; }
   .header-day { font-size: 12px; font-weight: 700; color: var(--cream); }
   .header-tz { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+  .alert-bar { background: #7B1D1D; padding: .5rem 1.5rem; display: flex; align-items: center; gap: 10px; }
+  .alert-bar-text { font-size: 12px; font-weight: 700; color: #FEE2E2; letter-spacing: .02em; }
+  .alert-dot { width: 8px; height: 8px; border-radius: 50%; background: #FCA5A5; flex-shrink: 0; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
   .people-strip { background: var(--forest); border-bottom: 1px solid rgba(255,255,255,.07); padding: .5rem 1.5rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
   .person { display: flex; align-items: center; gap: 10px; }
   .person-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: top center; border: 2px solid var(--green); flex-shrink: 0; }
@@ -42,27 +47,31 @@
   .tile { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(28,31,24,.07); display: flex; flex-direction: column; }
   .tile-bar { height: 5px; background: var(--green); flex-shrink: 0; }
   .tile-bar-gold { background: var(--gold); }
+  .tile-bar-red { background: var(--red); }
   .tile-head { padding: 1.1rem 1.25rem .85rem; display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--sand); }
   .tile-head-left { display: flex; align-items: center; gap: 11px; }
   .tile-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .ti-gold { background: #FBF3E3; } .ti-green { background: #E8F5EE; } .ti-blue { background: #E8F0FB; } .ti-teal { background: #E3F4EC; }
+  .ti-gold { background: #FBF3E3; } .ti-green { background: #E8F5EE; } .ti-blue { background: #E8F0FB; } .ti-teal { background: #E3F4EC; } .ti-red { background: #FEE2E2; }
   .tile-icon svg { width: 22px; height: 22px; }
   .tile-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 3px; }
-  .te-gold { color: var(--gold); }
+  .te-gold { color: var(--gold); } .te-red { color: var(--red); }
   .tile-title { font-size: 15px; font-weight: 700; color: var(--forest); }
   .tile-badge { font-size: 10px; font-weight: 700; letter-spacing: .04em; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; }
-  .tb-green { background: #E8F5EE; color: var(--green); } .tb-gold { background: #FBF3E3; color: var(--gold); }
+  .tb-green { background: #E8F5EE; color: var(--green); } .tb-gold { background: #FBF3E3; color: var(--gold); } .tb-red { background: #FEE2E2; color: var(--red); }
   .tile-body { padding: .85rem 1.25rem; flex: 1; }
   .drow { padding: 9px 0; border-bottom: 1px solid var(--sand); }
   .drow:last-of-type { border-bottom: none; padding-bottom: 0; }
   .prow { display: flex; align-items: flex-start; gap: 10px; }
   .pnum { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-  .p1 { background: var(--gold); color: var(--white); } .p2 { background: var(--sand); color: var(--charcoal); }
+  .p1 { background: var(--red); color: var(--white); } .p2 { background: var(--gold); color: var(--white); } .p3 { background: var(--sand); color: var(--charcoal); }
   .pname { font-size: 13.5px; font-weight: 700; color: var(--forest); line-height: 1.4; }
   .ptag { font-size: 10.5px; color: var(--green); font-weight: 700; margin-top: 3px; }
+  .insight-box { background: #F0F7F3; border-left: 3px solid var(--green); border-radius: 0 8px 8px 0; padding: 10px 12px; margin-bottom: 10px; }
+  .insight-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+  .insight-text { font-size: 12.5px; color: var(--charcoal); line-height: 1.55; }
   .pj-name { font-size: 13.5px; font-weight: 700; color: var(--forest); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .pj-pill { font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
-  .pill-gold { background: var(--gold); color: var(--white); } .pill-green { background: var(--green); color: var(--white); } .pill-sand { background: var(--sand); color: var(--charcoal); } .pill-amber { background: #FBF3E3; color: var(--gold); }
+  .pill-red { background: var(--red); color: var(--white); } .pill-gold { background: var(--gold); color: var(--white); } .pill-green { background: var(--green); color: var(--white); } .pill-sand { background: var(--sand); color: var(--charcoal); } .pill-amber { background: #FBF3E3; color: var(--gold); }
   .pj-body { font-size: 12px; color: var(--charcoal); line-height: 1.55; }
   .pj-next { font-size: 11px; color: var(--green); font-weight: 700; margin-top: 4px; }
   .irow { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -119,9 +128,14 @@
     <div class="header-sub">Freedom Investing Group</div>
   </div>
   <div class="header-date-zone">
-    <div class="header-day">Last updated: Wednesday, June 17, 2026</div>
+    <div class="header-day">Last updated: Friday, June 19, 2026</div>
     <div class="header-tz">Mountain Time</div>
   </div>
+</div>
+
+<div class="alert-bar">
+  <div class="alert-dot"></div>
+  <div class="alert-bar-text">&#9888;&#65039; CVE Insurance Renewal is due TODAY &#8212; contact Stephanie Haynes immediately</div>
 </div>
 
 <div class="people-strip">
@@ -142,25 +156,29 @@
 
   <!-- TILE 1: TOP PRIORITIES -->
   <div class="tile">
-    <div class="tile-bar"></div>
+    <div class="tile-bar tile-bar-red"></div>
     <div class="tile-head">
       <div class="tile-head-left">
-        <div class="tile-icon ti-gold">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#B8942A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="tile-icon ti-red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <div>
-          <div class="tile-eyebrow te-gold">Today's Focus</div>
+          <div class="tile-eyebrow te-red">Today's Focus</div>
           <div class="tile-title">Top Priorities</div>
         </div>
       </div>
-      <span class="tile-badge tb-gold">5 items</span>
+      <span class="tile-badge tb-red">5 items</span>
     </div>
     <div class="tile-body">
-      <div class="drow"><div class="prow"><div class="pnum p1">1</div><div><div class="pname">Rate Reset &#8212; Refi for CLK &amp; Acres Rd</div><div class="ptag">Five Star Bank &middot; Max needs additional docs from Ian Noble &amp; entities</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">2</div><div><div class="pname">CVE Insurance Renewal &#8212; due Jun 19</div><div class="ptag">Compliance &middot; Contact Stephanie Haynes</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">3</div><div><div class="pname">Week 1: Insurance &#8212; Duckers &amp; Valley View</div><div class="ptag">Duckers &amp; Valley View Due Diligence</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">4</div><div><div class="pname">Foley Survey &#8212; ALTA requested by lender</div><div class="ptag">Fiona-Cory Agenda</div></div></div></div>
-      <div class="drow"><div class="prow"><div class="pnum p2">5</div><div><div class="pname">Insurance at Foley &#8212; get quotes</div><div class="ptag">Foley Refi</div></div></div></div>
+      <div class="insight-box">
+        <div class="insight-label">&#128204; Fiona's notes</div>
+        <div class="insight-text">Working on insurance quotes for Foley alongside Duckers &amp; Valley View. Cory's calendar cleaned up for IBJJF American Nationals in Las Vegas next week &#8212; two flights appear (Jun 26 &amp; Jun 27), confirm which is correct. Quarterly meeting rescheduled by Cory to Friday after Thomas's PTO.</div>
+      </div>
+      <div class="drow"><div class="prow"><div class="pnum p1">1</div><div><div class="pname">CVE Insurance Renewal &#8212; due TODAY</div><div class="ptag">Compliance &middot; Contact Stephanie Haynes immediately</div></div></div></div>
+      <div class="drow"><div class="prow"><div class="pnum p2">2</div><div><div class="pname">Rate Reset &#8212; Refi for CLK &amp; Acres Rd</div><div class="ptag">Five Star Bank &middot; Noah &amp; Max need additional docs from Kelly, Thomas &amp; Celia, Ian Noble</div></div></div></div>
+      <div class="drow"><div class="prow"><div class="pnum p3">3</div><div><div class="pname">Inspection Result at Foley</div><div class="ptag">Fiona-Cory Agenda &middot; Awaiting update</div></div></div></div>
+      <div class="drow"><div class="prow"><div class="pnum p3">4</div><div><div class="pname">Week 1: Insurance &#8212; Duckers &amp; Valley View</div><div class="ptag">Duckers &amp; Valley View Due Diligence</div></div></div></div>
+      <div class="drow"><div class="prow"><div class="pnum p3">5</div><div><div class="pname">Foley Survey &#8212; ALTA requested by lender</div><div class="ptag">Fiona-Cory Agenda</div></div></div></div>
     </div>
     <div class="comment-zone">
       <div class="thread" id="thread-priorities"><div class="loading-c">Loading comments&#8230;</div></div>
@@ -187,12 +205,12 @@
       <span class="tile-badge tb-green">6 active</span>
     </div>
     <div class="tile-body">
-      <div class="drow"><div class="pj-name">Rate Reset &#8212; CLK &amp; Acres Rd <span class="pj-pill pill-gold">Urgent</span></div><div class="pj-body">Max Comerford (Five Star Bank) requesting additional docs: Campville &amp; Creekside P&amp;L + rent rolls, Ian Noble 2024&#8211;2025 tax returns &amp; personal financials, 2025 extensions for all 9 guarantor entities.</div><div class="pj-next">&#8594; Coordinate with Ian Noble; confirm if Max should reach out to Ian directly</div></div>
-      <div class="drow"><div class="pj-name">CVE Insurance Renewal <span class="pj-pill pill-gold">Due Jun 19</span></div><div class="pj-body">Commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pj-next">&#8594; Initiate renewal with Stephanie immediately</div></div>
-      <div class="drow"><div class="pj-name">Duckers &amp; Valley View &#8212; DD <span class="pj-pill pill-green">In Progress</span></div><div class="pj-body">Insurance quotes still pending from Mobile Agency for Morgan (Ocean Ridge Capital). Ryan &amp; Karla working on seller questions and WaterScope access &#8212; waterline map question answered by Ryan.</div><div class="pj-next">&#8594; Get insurance quotes to Morgan &#8212; last DD item before investors lock in</div></div>
-      <div class="drow"><div class="pj-name">Foley ALTA Survey <span class="pj-pill pill-green">In Progress</span></div><div class="pj-body">CREtelligent signed ($9.5k, Jun 8). Title commitment sent Jun 15. Lender: First Tech FCU. Inspection result in backlog &#8212; no notes yet.</div><div class="pj-next">&#8594; Awaiting survey delivery; follow up on inspection result</div></div>
-      <div class="drow"><div class="pj-name">HE Insurance Renewal <span class="pj-pill pill-amber">Backlog</span></div><div class="pj-body">Policy ZHSM077443 expires Jul 31. Worker's comp renewed Jun 8. Stephanie working on proposal.</div><div class="pj-next">&#8594; Waiting on Stephanie's proposal</div></div>
-      <div class="drow"><div class="pj-name">Clarksville Portfolio Insurance <span class="pj-pill pill-amber">Backlog</span></div><div class="pj-body">Policy EIG 6050648 01 &#8212; renews 07/29/2026. Support line: 888-682-6671.</div><div class="pj-next">&#8594; Monitor &#8212; renewal due Jul 29</div></div>
+      <div class="drow"><div class="pj-name">CVE Insurance Renewal <span class="pj-pill pill-red">Due Today</span></div><div class="pj-body">Commercial ($3,748) + park-owned homes ($3,062). Contact: Stephanie Haynes, Mobile Agency.</div><div class="pj-next">&#8594; Call Stephanie Haynes today to initiate renewal</div></div>
+      <div class="drow"><div class="pj-name">Rate Reset &#8212; CLK &amp; Acres Rd <span class="pj-pill pill-gold">Urgent</span></div><div class="pj-body">Noah Kabir (Five Star) added more items: Thomas &amp; Celia 2024 K-1s; Kelly Henderson 2022&#8211;2024 tax returns, K-1s &amp; SREO; clarification needed on whether Cory, Thomas &amp; Celia, and Kelly are providing personal 2025 extensions or entities only.</div><div class="pj-next">&#8594; Coordinate with Kelly, Thomas &amp; Celia; confirm extension scope with Max</div></div>
+      <div class="drow"><div class="pj-name">Duckers &amp; Valley View &#8212; DD <span class="pj-pill pill-green">In Progress</span></div><div class="pj-body">Ryan flagged leak detection issue &#8212; master meter 2 and individual meter problems; WaterScope &amp; Metron involved. Weekly investment tracker update needed &#8212; Fiona to inform Sarah we are still collecting investments, expecting to start tracking next week.</div><div class="pj-next">&#8594; Get insurance quotes to Morgan; update Sarah on investor tracker timeline</div></div>
+      <div class="drow"><div class="pj-name">Foley ALTA Survey <span class="pj-pill pill-green">In Progress</span></div><div class="pj-body">CREtelligent signed ($9.5k). Title commitment sent Jun 15. Inspection result pending &#8212; no notes yet in Asana.</div><div class="pj-next">&#8594; Follow up on inspection result; awaiting survey delivery</div></div>
+      <div class="drow"><div class="pj-name">HE Insurance Renewal <span class="pj-pill pill-amber">Backlog</span></div><div class="pj-body">Policy ZHSM077443 expires Jul 31. Fiona working on insurance quotes for Foley alongside this.</div><div class="pj-next">&#8594; Waiting on Stephanie's proposal</div></div>
+      <div class="drow"><div class="pj-name">Clarksville Portfolio Insurance <span class="pj-pill pill-amber">Backlog</span></div><div class="pj-body">Policy EIG 6050648 01 &#8212; renews 07/29/2026.</div><div class="pj-next">&#8594; Monitor &#8212; renewal due Jul 29</div></div>
     </div>
     <div class="comment-zone">
       <div class="thread" id="thread-projects"><div class="loading-c">Loading comments&#8230;</div></div>
@@ -216,12 +234,12 @@
           <div class="tile-title">Cory's Inbox</div>
         </div>
       </div>
-      <span class="tile-badge tb-gold">4 items</span>
+      <span class="tile-badge tb-green">7 items</span>
     </div>
     <div class="tile-body">
-      <div class="drow"><div class="irow"><div><div class="iname">! Cory please handle</div><div class="idesc">Morgan (Ocean Ridge Capital) &#8212; still waiting on insurance quotes for Duckers &amp; Valley View before investors can lock in. James Durst responded to the Duckers investment update &#8212; signed everything, asking when funds are needed and if he can mail or deliver a check.</div></div><span class="ibadge ib-gold">2</span></div></div>
-      <div class="drow"><div class="irow"><div><div class="iname">1. FYI</div><div class="idesc">Karla working with Greg on mobile home park expansion at Acres Road. Ryan &amp; Karla on Duckers &amp; Valley View DD seller questions; Ryan answered waterline map question for Carla.</div></div><span class="ibadge ib-sand">2</span></div></div>
-      <div class="drow"><div class="irow"><div><div class="iname">2. Fiona to respond</div><div class="idesc">Nothing today</div></div><span class="ibadge ib-sand">0</span></div></div>
+      <div class="drow"><div class="irow"><div><div class="iname">! Cory please handle</div><div class="idesc">All clear &#8212; Cory is caught up</div></div><span class="ibadge ib-sand">0</span></div></div>
+      <div class="drow"><div class="irow"><div><div class="iname">1. FYI</div><div class="idesc">Rate Reset docs coordination with Five Star (Noah &amp; Max) and Kelly Henderson &#8212; pending tax info &amp; personal financial docs. Henry &amp; Trevor inquiring about MHP portfolio opportunity. Duckers &amp; Valley View DD &#8212; Ryan flagging leak detection issues (master meter 2, WaterScope, Metron).</div></div><span class="ibadge ib-sand">5</span></div></div>
+      <div class="drow"><div class="irow"><div><div class="iname">2. Fiona to respond</div><div class="idesc">Weekly investment tracker for Duckers &amp; Valley View &#8212; Fiona to update Sarah that we are still collecting investments; tracker starts next week.</div></div><span class="ibadge ib-green">2</span></div></div>
       <div class="drow"><div class="irow"><div><div class="iname">3. Review</div><div class="idesc">Nothing today</div></div><span class="ibadge ib-sand">0</span></div></div>
     </div>
     <div class="comment-zone">
@@ -246,15 +264,13 @@
           <div class="tile-title">Meetings &amp; Calendar</div>
         </div>
       </div>
-      <span class="tile-badge tb-green">6 events</span>
+      <span class="tile-badge tb-green">4 events</span>
     </div>
     <div class="tile-body">
-      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today &middot; 9:30 AM</div><div class="cevent">Cory &lt;&gt; Yasha &#8212; Blueprint Industrial Capital</div><div class="csub">First call &#8212; potential capital partner (Yasha &amp; Arthur Wells)</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today &middot; 10:00 AM</div><div class="cevent">Catch up on prospective deals</div><div class="csub">Start with Columbia TN and Lexington</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today &middot; 11:00 AM</div><div class="cevent">Raise Masters Q&amp;A</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today &middot; 2:30 PM</div><div class="cevent">Weekly Team Check In</div><div class="csub">L10 &#8212; Cory, Karla, Thomas, Axel, Kim, Fiona, Sergio</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Thu &middot; 1:15 PM</div><div class="cevent">Fiona&#8211;Cory Sync</div></div></div></div>
-      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div></div><div style="flex:1"><div class="ctime">Thu &middot; 1:45 PM</div><div class="cevent">Freedom Capital Call &#8212; TN/CCH</div><div class="csub">Cory + Thomas</div></div></div></div>
+      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Today &middot; 9:00 AM</div><div class="cevent">Weekly Planning</div><div class="csub">9:00 &#8211; 11:30 AM &middot; Cory solo planning block</div></div></div></div>
+      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Sat Jun 20</div><div class="cevent">Chess Tournament at Handlebar</div><div class="csub">4:00 &#8211; 6:00 PM &middot; 8-min + 2s delay &middot; The Handlebar, Boise</div></div></div></div>
+      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div><div class="c-line"></div></div><div style="flex:1"><div class="ctime">Sat Jun 21</div><div class="cevent">Marcus &#8212; Rabies Vaccine Dose 4 (Final)</div><div class="csub">St. Luke's Travel Medicine, Meridian &middot; Call ahead: (208) 706-7200</div></div></div></div>
+      <div class="drow"><div class="crow"><div class="c-dot-col"><div class="c-dot"></div></div><div style="flex:1"><div class="ctime">Next Week</div><div class="cevent">IBJJF American Nationals &#8212; Las Vegas</div><div class="csub">Calendar cleaned up &middot; Two flights on file (Jun 26 &amp; Jun 27) &#8212; confirm correct departure with Fiona</div></div></div></div>
     </div>
   </div>
 
@@ -262,14 +278,14 @@
 </div>
 
 <div class="footer">
-  <div class="footer-text">Freedom Investing Group &middot; Daily Executive Brief &middot; June 17, 2026</div>
+  <div class="footer-text">Freedom Investing Group &middot; Daily Executive Brief &middot; June 19, 2026</div>
   <div class="footer-text">Confidential &#8212; Internal Use</div>
 </div>
 
 <script>
 const RELAY = "https://fc-dashboard-relay.fiona-251.workers.dev";
-const DASHBOARD_DATE = "2026-06-17";
-const DATE_LABEL = "Wednesday, June 17, 2026";
+const DASHBOARD_DATE = "2026-06-19";
+const DATE_LABEL = "Friday, June 19, 2026";
 const DASHBOARD_URL = "https://fionaeflynnecafe.github.io/fiona-cory-dashboard";
 
 function renderComments(section, comments) {
